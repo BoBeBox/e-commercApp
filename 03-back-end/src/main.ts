@@ -3,6 +3,8 @@ import * as cors from "cors";
 import * as morgan from "morgan";
 import * as fs from "fs";
 import Config from "./config/dev";
+import CategoryService from './components/category/service';
+import CategoryController from './components/category/controller';
 import path = require("path");
 
 const application: express.Application = express()
@@ -34,6 +36,16 @@ application.use(
 
 application.use(cors());
 application.use(express.json());
+
+//Services:
+const categoryService: CategoryService = new CategoryService();
+
+//Controller:
+const categoryController: CategoryController = new CategoryController(categoryService);
+
+//Routing:
+application.get("/api/category", categoryController.getAll.bind(categoryController));
+application.get("/api/category/:id", categoryController.getById.bind(categoryController));
 
 application.use((req, res)=>{
     res.sendStatus(404);
