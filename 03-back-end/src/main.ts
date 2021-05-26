@@ -66,8 +66,8 @@ Router.setupRoutes(
         new CategoryRouther(),
     ]
 );
-application.use((req, res)=>{
-    res.sendStatus(404);
+application.use((err, req, res, next)=>{
+    res.status(err.status).send(err.type); //handle errors
 });
 
 application.listen(Config.server.port);
