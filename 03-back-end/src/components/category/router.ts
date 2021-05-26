@@ -1,8 +1,8 @@
 import * as express from 'express';
-import IApplicationResources from '../../services/IApplicationResources.interface';
+import IApplicationResources from '../../common/IApplicationResources.interface';
 import CategoryService from './service';
 import CategoryController from './controller';
-import IRouter from '../../config/IRouter.interface';
+import IRouter from '../../common/IRouter.interface';
 export default class CategoryRouther implements IRouter {
     public setupRoutes(application: express.Application, resources: IApplicationResources){
         

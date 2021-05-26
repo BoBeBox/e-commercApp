@@ -1,5 +1,5 @@
 import * as express from 'express';
-import IApplicationResources from '../services/IApplicationResources.interface';
+import IApplicationResources from './IApplicationResources.interface';
 
 
 export default interface IRouter {

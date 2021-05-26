@@ -1,4 +1,4 @@
-import IConfig from "./IConfig.interface";
+import IConfig from "../common/IConfig.interface";
 
 const Config: IConfig = {
     server: {

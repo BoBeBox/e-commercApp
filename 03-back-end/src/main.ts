@@ -5,7 +5,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import Config from "./config/dev";
-import IApplicationResources from './services/IApplicationResources.interface';
+import IApplicationResources from './common/IApplicationResources.interface';
 import CategoryRouther from './components/category/router';
 import * as mysql2 from 'mysql2/promise';
 import { hostname } from "os";
