@@ -6,7 +6,7 @@ export default class CategoryRouther {
     public static setupRouter(application: express.Application, resources: IApplicationResources){
         
         //Services
-        const categoryService: CategoryService = new CategoryService()
+        const categoryService: CategoryService = new CategoryService(resources.databaseConnection);
 
         //Controllers
         const categoryController: CategoryController = new CategoryController(categoryService);

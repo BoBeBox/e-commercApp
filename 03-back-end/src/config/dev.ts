@@ -17,6 +17,15 @@ const Config: IConfig = {
     looger: {
         path: "logs/access.log"
     },
+    database: {
+        host: "localhost",
+        port: 3306,
+        user: "root",
+        password: "BeBoX",
+        database: "aplikacija",
+        charset: "utf8",
+        timezone: "+01:00"
+    },
 }
 
 export default Config;

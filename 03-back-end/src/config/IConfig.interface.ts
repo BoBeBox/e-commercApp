@@ -14,4 +14,13 @@ export default interface IConfig {
     looger: {
         path: string,
     },
+    database: {
+        host: string,
+        port: number,
+        user: string,
+        password: string,
+        database: string,
+        charset: string,
+        timezone: string,
+    },
 }

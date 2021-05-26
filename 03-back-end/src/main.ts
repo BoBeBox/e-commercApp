@@ -2,21 +2,26 @@ import * as express from "express";
 import * as cors from "cors";
 import * as morgan from "morgan";
 import * as fs from "fs";
+import * as path from "path";
+
 import Config from "./config/dev";
-import CategoryService from './components/category/service';
-import CategoryController from './components/category/controller';
 import IApplicationResources from './services/IApplicationResources.interface';
 import CategoryRouther from './components/category/router';
-import path = require("path");
+import * as mysql2 from 'mysql2/promise';
+import { hostname } from "os";
+
+
+async function main() {
+
 
 const application: express.Application = express()
 
-fs.mkdirSync(path.dirname(Config.looger.path),{
+fs.mkdirSync(path.dirname(Config.looger.path), {
     mode: 0o755,
-    recursive: true,
-})
+    recursive: true
+});
 
-application.use(morgan(":date[iso]\t:remote-addr\t:method\t:url\t:status\t:res[content-lenght] bytes\t:response-time ms", {
+application.use(morgan(":date[iso]\t:remote-addr\t:method\t:url\t:status\t:res[content-length] bytes\t:response-time ms", {
     stream: fs.createWriteStream(Config.looger.path),
 }));
 
@@ -39,7 +44,19 @@ application.use(
 application.use(cors());
 application.use(express.json());
 
-const resources: IApplicationResources = {};
+const resources: IApplicationResources = {
+    databaseConnection: await mysql2.createConnection({
+        host: Config.database.host,
+        port: Config.database.port,
+        user: Config.database.user,
+        password: Config.database.password,
+        charset: Config.database.charset,
+        timezone: Config.database.timezone,
+        supportBigNumbers: true,
+    }),
+};
+
+resources.databaseConnection.connect();
 
 CategoryRouther.setupRouter(application, resources);
 
@@ -48,3 +65,6 @@ application.use((req, res)=>{
 });
 
 application.listen(Config.server.port);
+}
+
+main();
