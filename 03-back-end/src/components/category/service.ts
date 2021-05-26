@@ -1,5 +1,6 @@
 import CategoryModel from './model';
 import * as mysql2 from 'mysql2/promise';
+import { IAddCategory } from './dto/IAddCategory';
 
 
 class CategoryService {
@@ -95,6 +96,23 @@ class CategoryService {
                 loadParent: true,
             }
         );
+    }
+
+    public async add(data: IAddCategory): Promise<CategoryModel|null>{
+        return new Promise<CategoryModel|null>((result)=>{
+            const sql: string = "INSERT category SET name = ?, image_path = ?, parent_category_id = ?;";
+
+            this.db.execute(sql, [data.name, data.imagePath, data.parentCategoryId ?? null])
+                .then(async res => {
+                    const resultData: any = res;
+                    const newCategoryId: number = Number(resultData[0]?.insertId);
+                    result(await this.getById(newCategoryId));
+                })
+                .catch(err => {
+                    console.error(err?.sqlMessage); 
+                    result(null);
+                })
+        })
     }
 }
 

@@ -1,6 +1,7 @@
 import CategoryService from './service';
 import * as express from 'express';
 import CategoryModel from './model';
+import { IAddCategory, IAddCategorySchemaValidator } from './dto/IAddCategory';
 class CategoryController {
     private categoryService: CategoryService;
 
@@ -27,6 +28,21 @@ class CategoryController {
             return;
         }
         res.send(item);
+    }
+
+    async add(req: express.Request, res: express.Response, next: express.NextFunction){
+        const item = req.body;
+
+        if(!IAddCategorySchemaValidator(item)){
+            res.status(400).send(IAddCategorySchemaValidator.errors);
+            return;
+        }
+
+        const data: IAddCategory = item;
+
+        const newCategory: CategoryModel|null = await this.categoryService.add(data);
+
+        res.send(newCategory);
     }
 }
 

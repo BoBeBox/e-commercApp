@@ -15,5 +15,6 @@ export default class CategoryRouther implements IRouter {
         //Routing:
         application.get("/api/category", categoryController.getAll.bind(categoryController));
         application.get("/api/category/:id", categoryController.getById.bind(categoryController));
+        application.post("/api/category", categoryController.add.bind(categoryController));
     }
 }
