@@ -2,6 +2,7 @@ import CategoryService from './service';
 import * as express from 'express';
 import CategoryModel from './model';
 import { IAddCategory, IAddCategorySchemaValidator } from './dto/IAddCategory';
+import IErrorResponse from '../../common/IErrorResponse.interface';
 class CategoryController {
     private categoryService: CategoryService;
 
@@ -40,7 +41,7 @@ class CategoryController {
 
         const data: IAddCategory = item;
 
-        const newCategory: CategoryModel|null = await this.categoryService.add(data);
+        const newCategory: CategoryModel|IErrorResponse = await this.categoryService.add(data);
 
         res.send(newCategory);
     }
