@@ -5,6 +5,8 @@ import * as fs from "fs";
 import Config from "./config/dev";
 import CategoryService from './components/category/service';
 import CategoryController from './components/category/controller';
+import IApplicationResources from './services/IApplicationResources.interface';
+import CategoryRouther from './components/category/router';
 import path = require("path");
 
 const application: express.Application = express()
@@ -37,15 +39,9 @@ application.use(
 application.use(cors());
 application.use(express.json());
 
-//Services:
-const categoryService: CategoryService = new CategoryService();
+const resources: IApplicationResources = {};
 
-//Controller:
-const categoryController: CategoryController = new CategoryController(categoryService);
-
-//Routing:
-application.get("/api/category", categoryController.getAll.bind(categoryController));
-application.get("/api/category/:id", categoryController.getById.bind(categoryController));
+CategoryRouther.setupRouter(application, resources);
 
 application.use((req, res)=>{
     res.sendStatus(404);
