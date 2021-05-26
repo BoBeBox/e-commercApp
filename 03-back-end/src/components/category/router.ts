@@ -2,8 +2,9 @@ import * as express from 'express';
 import IApplicationResources from '../../services/IApplicationResources.interface';
 import CategoryService from './service';
 import CategoryController from './controller';
-export default class CategoryRouther {
-    public static setupRouter(application: express.Application, resources: IApplicationResources){
+import IRouter from '../../config/IRouter.interface';
+export default class CategoryRouther implements IRouter {
+    public setupRoutes(application: express.Application, resources: IApplicationResources){
         
         //Services
         const categoryService: CategoryService = new CategoryService(resources.databaseConnection);

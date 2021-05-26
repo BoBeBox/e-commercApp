@@ -9,6 +9,7 @@ import IApplicationResources from './services/IApplicationResources.interface';
 import CategoryRouther from './components/category/router';
 import * as mysql2 from 'mysql2/promise';
 import { hostname } from "os";
+import Router from './router';
 
 
 async function main() {
@@ -58,8 +59,13 @@ const resources: IApplicationResources = {
 
 resources.databaseConnection.connect();
 
-CategoryRouther.setupRouter(application, resources);
-
+Router.setupRoutes(
+    application,
+    resources,
+    [
+        new CategoryRouther(),
+    ]
+);
 application.use((req, res)=>{
     res.sendStatus(404);
 });
