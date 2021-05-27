@@ -3,6 +3,7 @@ import { IAddCategory } from './dto/IAddCategory';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseService from '../../services/BaseServices';
 import IModelAdapterOprtionsInterface from '../../common/IModelAdapterOprtions.Interface';
+import { IEditCategory } from './dto/IEditCategory';
 
 
 class CategoryService extends BaseService<CategoryModel> {
@@ -34,7 +35,7 @@ class CategoryService extends BaseService<CategoryModel> {
     }
 
     public async getAll(): Promise<CategoryModel[]>{
-        return this.getByFieldIdFromTable("category", "parent_category_id", null);
+        return this.getByFieldIdFromTable("category", "category_id", null);
     }
 
     public async getByParentCategoryId(parentCategoryId: number): Promise<CategoryModel[]> {
@@ -42,7 +43,7 @@ class CategoryService extends BaseService<CategoryModel> {
     }
 
     public async getById(categoryId: number): Promise<CategoryModel|null>{
-        return super.getByIdFromTable("category", categoryId);
+        return super.getByIdFromTable("category", categoryId, { loadParent: false, loadChildren: true, });
     }
 
     public async add(data: IAddCategory): Promise<CategoryModel|IErrorResponse>{
@@ -62,6 +63,30 @@ class CategoryService extends BaseService<CategoryModel> {
                     });
                 })
         })
+    }
+
+    public async edit(categoryId: number, data: IEditCategory): Promise<CategoryModel|IErrorResponse>{
+        return new Promise<CategoryModel|IErrorResponse>((result) => {
+            const sql: string=`
+            UPDATE
+                categpry
+            SET
+                name = ?,
+                image_path = ?,
+                parent_category_id = ?
+            WHERE
+                category_id = ?;`;
+        this.db.execute(sql,[data.name, data.imagePath, data.parentCategoryId ?? null, categoryId])
+            .then(async res => {
+                result(await this.getById(categoryId));
+            })
+            .catch(err => {
+                result({
+                    errorCode: err?.errno,
+                    message: err?.sqlMessage,
+                });
+            });
+        });
     }
 }
 

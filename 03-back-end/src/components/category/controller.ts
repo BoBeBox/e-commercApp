@@ -3,6 +3,7 @@ import * as express from 'express';
 import CategoryModel from './model';
 import { IAddCategory, IAddCategorySchemaValidator } from './dto/IAddCategory';
 import IErrorResponse from '../../common/IErrorResponse.interface';
+import { IEditCategory, IEditCategorySchemaValidator } from './dto/IEditCategory';
 class CategoryController {
     private categoryService: CategoryService;
 
@@ -44,6 +45,22 @@ class CategoryController {
         const newCategory: CategoryModel|IErrorResponse = await this.categoryService.add(data);
 
         res.send(newCategory);
+    }
+
+    async editById(req: express.Request, res:express.Response, next: express.NextFunction){
+        const item = req.body;
+        const categoryId = Number(req.params.id);
+
+        if(categoryId <= 0){
+            res.status(400).send(["the category ID must be a numerical value larger than 0."]);
+            return;
+        }
+
+        if(!IEditCategorySchemaValidator(item)){
+            res.status(400).send(IEditCategorySchemaValidator.errors);
+            return;
+        }
+        const editedCategory: CategoryModel|IErrorResponse = await this.categoryService.edit(categoryId, item as IEditCategory);
     }
 }
 
