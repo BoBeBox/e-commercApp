@@ -1,5 +1,5 @@
-import * as mysql2 from "mysql2/promise";
-class CategoryModel {
+import IModel from '../../common/IModel.interface';
+class CategoryModel implements IModel {
     categoryId: number;
     name: string;
     imagePath: string;
