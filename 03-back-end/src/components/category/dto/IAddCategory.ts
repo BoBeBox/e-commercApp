@@ -23,7 +23,7 @@ const IAddCategorySchema = {
             pattern: "\.(png|jpg)$"
         },
         parentCategoryId: {
-            type: ["intiger","null"],
+            type: ["integer","null"],
             minimum: 1,
         },
     },

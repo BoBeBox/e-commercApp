@@ -2,7 +2,7 @@ import IConfig from "../common/IConfig.interface";
 
 const Config: IConfig = {
     server: {
-        port: 40800,
+        port: 40080,
         static: {
             path: "static/",
             route: "/static",
@@ -14,8 +14,8 @@ const Config: IConfig = {
         },
     },
 
-    looger: {
-        path: "logs/access.log"
+    logger: {
+        path: "logs/access.log",
     },
     database: {
         host: "localhost",

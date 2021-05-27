@@ -11,7 +11,7 @@ export default interface IConfig {
             index: boolean
         },
     },
-    looger: {
+    logger: {
         path: string,
     },
     database: {

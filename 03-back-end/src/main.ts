@@ -17,13 +17,13 @@ async function main() {
 
 const application: express.Application = express()
 
-fs.mkdirSync(path.dirname(Config.looger.path), {
+fs.mkdirSync(path.dirname(Config.logger.path), {
     mode: 0o755,
     recursive: true
 });
 
 application.use(morgan(":date[iso]\t:remote-addr\t:method\t:url\t:status\t:res[content-length] bytes\t:response-time ms", {
-    stream: fs.createWriteStream(Config.looger.path),
+    stream: fs.createWriteStream(Config.logger.path),
 }));
 
 application.use(
@@ -51,6 +51,7 @@ const resources: IApplicationResources = {
         port: Config.database.port,
         user: Config.database.user,
         password: Config.database.password,
+        database: Config.database.database,
         charset: Config.database.charset,
         timezone: Config.database.timezone,
         supportBigNumbers: true,

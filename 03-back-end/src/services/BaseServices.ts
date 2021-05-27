@@ -13,7 +13,7 @@ export default abstract class BaseService<ReturnModel extends IModel>{
         return this.database;
     }
 
-    abstract adaptToModedl(
+    abstract adaptToModel(
         data: any,
         options:Partial<IModelAdapterOptions>,
     ): Promise<ReturnModel>; //adapter izmedu baze i aplikacije (transformacija podataka)
@@ -32,7 +32,7 @@ export default abstract class BaseService<ReturnModel extends IModel>{
         if(Array.isArray(rows)){
             for(const row of rows){
                 items.push(
-                    await this.adaptToModedl(
+                    await this.adaptToModel(
                         row,
                         options,
                     )
@@ -61,40 +61,39 @@ export default abstract class BaseService<ReturnModel extends IModel>{
             return null;
         }
 
-        return await this.adaptToModedl(
+        return await this.adaptToModel(
             rows[0],
             options,
         );
     }
 
-    protected async getByFieldIdFromTable(
+     protected async getByFieldIdFromTable<AdapterOptions extends IModelAdapterOptions>(
         tableName: string,
         fieldName: string,
         fieldValue: any,
-        options: Partial<IModelAdapterOptions> ={
-            loadChildren: true,
-        },
-    ): Promise<ReturnModel[]>{
+        options: Partial<AdapterOptions> = {},
+    ): Promise<ReturnModel[]> {
         const items: ReturnModel[] = [];
 
         let sql: string = `SELECT * FROM ${tableName} WHERE ${fieldName} = ?;`;
 
-        if(fieldValue === null){
+        if (fieldValue === null) {
             sql = `SELECT * FROM ${tableName} WHERE ${fieldName} IS NULL;`;
         }
-        const [rows, fields] = await this.db.execute(sql, [fieldValue]);
 
-        if(Array.isArray(rows)){
-            for(const row of rows){
+        const [ rows, fields ] = await this.db.execute(sql, [fieldValue]);
+
+        if (Array.isArray(rows)) {
+            for (const row of rows) {
                 items.push(
-                    await this.adaptToModedl(
+                    await this.adaptToModel(
                         row,
                         options,
                     )
                 );
             }
         }
+
         return items;
     }
-
 }

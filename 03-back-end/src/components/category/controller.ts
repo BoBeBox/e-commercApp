@@ -62,6 +62,16 @@ class CategoryController {
         }
         const editedCategory: CategoryModel|IErrorResponse = await this.categoryService.edit(categoryId, item as IEditCategory);
     }
+
+    async deleteById(req: express.Request, res: express.Response, next: express.NextFunction){
+        const catetgoryId = Number(req.params.id);
+
+        if(catetgoryId <= 0){
+            res.status(400).send(["The category ID must be a numerical value larger than 0."]);
+            return;
+        }
+        res.send(await this.categoryService.delete(catetgoryId));
+    }
 }
 
 export default CategoryController;

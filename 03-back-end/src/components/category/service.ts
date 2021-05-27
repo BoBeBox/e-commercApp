@@ -7,9 +7,6 @@ import { IEditCategory } from './dto/IEditCategory';
 
 
 class CategoryService extends BaseService<CategoryModel> {
-    adaptToModedl(data: any, options: Partial<IModelAdapterOprtionsInterface>): Promise<CategoryModel> {
-        throw new Error('Method not implemented.');
-    }
 
     async adaptToModel(
         data: any,
@@ -65,28 +62,50 @@ class CategoryService extends BaseService<CategoryModel> {
         })
     }
 
-    public async edit(categoryId: number, data: IEditCategory): Promise<CategoryModel|IErrorResponse>{
+    public async edit(categoryId: number, data: IEditCategory): Promise<CategoryModel|IErrorResponse> {
         return new Promise<CategoryModel|IErrorResponse>((result) => {
-            const sql: string=`
-            UPDATE
-                categpry
-            SET
-                name = ?,
-                image_path = ?,
-                parent_category_id = ?
-            WHERE
-                category_id = ?;`;
-        this.db.execute(sql,[data.name, data.imagePath, data.parentCategoryId ?? null, categoryId])
+            const sql: string = `
+                UPDATE
+                    category
+                SET
+                    name = ?,
+                    image_path = ?,
+                    parent__category_id = ?
+                WHERE
+                    category_id = ?;`;
+
+            this.db.execute(sql, [data.name, data.imagePath, data.parentCategoryId ?? null, categoryId])
+                .then(async res => {
+                    result(await this.getById(categoryId));
+                })
+                .catch(err => {
+                    result({
+                        errorCode: err?.errno,
+                        message: err?.sqlMessage,
+                    });
+                });
+        });
+    }
+
+    public async delete (categoryId: number): Promise<IErrorResponse>{
+        return new Promise<IErrorResponse>((result)=>{
+            const sql: string = `DELETE FROM category WHERE category_id = ?;`;
+
+            this.db.execute(sql, [categoryId])
             .then(async res => {
-                result(await this.getById(categoryId));
+                const data: any = res;
+                result({
+                    errorCode: 0,
+                    message: `Deleted ${data[0].affectedRpws} rows`
+                });
             })
             .catch(err => {
                 result({
-                    errorCode: err?.errno,
+                    errorCode:err?.errno,
                     message: err?.sqlMessage,
                 });
             });
-        });
+        })
     }
 }
 
