@@ -1,9 +1,11 @@
 import CategoryService from './service';
+
 import * as express from 'express';
 import CategoryModel from './model';
 import { IAddCategory, IAddCategorySchemaValidator } from './dto/IAddCategory';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import { IEditCategory, IEditCategorySchemaValidator } from './dto/IEditCategory';
+
 class CategoryController {
     private categoryService: CategoryService;
 
@@ -40,9 +42,8 @@ class CategoryController {
             return;
         }
 
-        const data: IAddCategory = item;
 
-        const newCategory: CategoryModel|IErrorResponse = await this.categoryService.add(data);
+        const newCategory: CategoryModel|IErrorResponse = await this.categoryService.add(item as IAddCategory);
 
         res.send(newCategory);
     }
@@ -61,6 +62,8 @@ class CategoryController {
             return;
         }
         const editedCategory: CategoryModel|IErrorResponse = await this.categoryService.edit(categoryId, item as IEditCategory);
+
+        res.send(editedCategory);
     }
 
     async deleteById(req: express.Request, res: express.Response, next: express.NextFunction){

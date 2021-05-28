@@ -32,7 +32,7 @@ class CategoryService extends BaseService<CategoryModel> {
     }
 
     public async getAll(): Promise<CategoryModel[]>{
-        return this.getByFieldIdFromTable("category", "category_id", null);
+        return this.getByFieldIdFromTable("category", "parent_category_id", null);
     }
 
     public async getByParentCategoryId(parentCategoryId: number): Promise<CategoryModel[]> {
@@ -70,7 +70,7 @@ class CategoryService extends BaseService<CategoryModel> {
                 SET
                     name = ?,
                     image_path = ?,
-                    parent__category_id = ?
+                    parent_category_id = ?
                 WHERE
                     category_id = ?;`;
 
@@ -96,7 +96,7 @@ class CategoryService extends BaseService<CategoryModel> {
                 const data: any = res;
                 result({
                     errorCode: 0,
-                    message: `Deleted ${data[0].affectedRpws} rows`
+                    message: `Deleted ${data[0].affectedRows} rows`
                 });
             })
             .catch(err => {
