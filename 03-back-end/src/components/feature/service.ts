@@ -1,36 +1,30 @@
 import BaseService from '../../services/BaseServices';
 import FeatureModel from './model';
-import * as mysql2 from 'mysql2/promise';
-import CategoryService from '../category/service';
 import IModelAdapterOptions from '../../common/IModelAdapterOprtions.Interface';
 import CategoryModel from '../category/model';
 import { IAddFeature } from './dto/IAddFeature';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import { IEditFeature } from './dto/IEditFeature';
+
+class FeatureModelAdapterOptions implements IModelAdapterOptions {
+    loadParentCategory: boolean = false;
+}
+
 class FeatureService extends BaseService<FeatureModel>{
-    private categoryService: CategoryService
-
-    constructor(database: mysql2.Connection){
-        super (database);
-        this.categoryService = new CategoryService(this.db);
-    }
-
     async adaptToModel(
         data: any,
-        options: Partial<{ loadParent: boolean, loadChildren: boolean }> = {
-            loadParent: false,
-            loadChildren: false
-        }
+        options: Partial<FeatureModelAdapterOptions>,
     ): Promise<FeatureModel> {
         const item: FeatureModel = new FeatureModel();
 
-        item.featureId = Number(data?.featureId);
+        item.featureId = Number(data?.feature_id);
         item.name = data?.name;
-        item.categoryId = Number(data?.categoryId);
+        item.categoryId = Number(data?.category_id);
 
-        if(options.loadParent && item.categoryId !== null){
-            item.category = await this.categoryService.getById(item.categoryId);
+        if(options.loadParentCategory && item.categoryId !== null){
+            item.category = await this.services.categoryService.getById(item.categoryId);
         } //adapter koji komunicira izmedju categoryService i Feature
+
         return item;
     }
 
@@ -38,8 +32,12 @@ class FeatureService extends BaseService<FeatureModel>{
         return super.getByIdFromTable("feature",featureId, options);
     }
 
-    public async getAllByParentCategoryId(categoryId: number): Promise<FeatureModel[]>{
-        const firstParent = await this.categoryService.getById(categoryId);
+    public async getAllByParentCategoryId(categoryId: number): Promise<FeatureModel[]> {
+        const firstParent = await this.services.categoryService.getById(categoryId, {
+            loadFeatures: false,
+            loadParentCategories: false,
+            loadSubCategories: false,
+        });
 
         if(!(firstParent instanceof CategoryModel)){
             return []
@@ -49,10 +47,15 @@ class FeatureService extends BaseService<FeatureModel>{
 
         let currentParent: CategoryModel|null = firstParent;
 
-        while(currentParent !== null){
-            features.push(... await super.getByFieldIdFromTable("feature", "category_id", currentParent.categoryId, {loadParent: false, loadChildren: false}));
-            currentParent = await this.categoryService.getById(currentParent.parentCategoryId);
+        while (currentParent !== null) {
+            features.push(... await super.getByFieldIdFromTable<FeatureModelAdapterOptions>("feature", "category_id", currentParent.categoryId));
+            currentParent = await this.services.categoryService.getById(currentParent.parentCategoryId, {
+                loadParentCategories: false,
+                loadSubCategories: false,
+                loadFeatures: false,
+            });
         }
+
         return features;
     }
 
@@ -116,7 +119,7 @@ class FeatureService extends BaseService<FeatureModel>{
                     message: err?.sqlMessage,
                 });
             });
-        })
+        });
     }
 }
 export default FeatureService;

@@ -2,18 +2,19 @@ import CategoryModel from './model';
 import { IAddCategory } from './dto/IAddCategory';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseService from '../../services/BaseServices';
-import IModelAdapterOprtionsInterface from '../../common/IModelAdapterOprtions.Interface';
 import { IEditCategory } from './dto/IEditCategory';
+import IModelAdapterOptions from '../../common/IModelAdapterOprtions.Interface';
 
-
+class CategoryModelAdapterOptions implements IModelAdapterOptions{
+    loadParentCategories: boolean = false;
+    loadSubCategories: boolean = false;
+    loadFeatures: boolean = false;
+}
 class CategoryService extends BaseService<CategoryModel> {
 
     async adaptToModel(
         data: any,
-        options: Partial<{ loadParent: boolean, loadChildrean: boolean }> = {
-            loadParent : false,
-            loadChildrean : false, //OVDE VIDI
-        }
+        options: Partial<CategoryModelAdapterOptions>,
     ): Promise<CategoryModel>{
         const item: CategoryModel = new CategoryModel();
 
@@ -22,25 +23,39 @@ class CategoryService extends BaseService<CategoryModel> {
         item.imagePath = data?.image_path;
         item.parentCategoryId = Number(data?.parent_category_id);
 
-        if(options.loadParent && item.parentCategoryId){
+        if(options.loadParentCategories && item.parentCategoryId){
             item.parentCategory = await this.getById(item.parentCategoryId);
         }
-        if(options.loadChildrean ){
+        if(options.loadSubCategories){
             item.subcategories = await this.getByParentCategoryId(item.categoryId);
         }
+
+        if(options.loadFeatures){
+            item.features = await this.services.featureService.getAllByParentCategoryId(item.categoryId)
+        }
+
         return item;
     }
 
     public async getAll(): Promise<CategoryModel[]>{
-        return this.getByFieldIdFromTable("category", "parent_category_id", null);
+        return super.getByFieldIdFromTable<CategoryModelAdapterOptions>("category", "parent_category_id", null,{
+            loadSubCategories: true,
+            loadFeatures: true,
+        });
     }
 
     public async getByParentCategoryId(parentCategoryId: number): Promise<CategoryModel[]> {
-        return this.getByFieldIdFromTable("category", "parent_category_id", parentCategoryId);
+        return super.getByFieldIdFromTable<CategoryModelAdapterOptions>("category", "parent_category_id", parentCategoryId,{
+            loadSubCategories: true,
+            loadFeatures: true,
+        });
     }
 
-    public async getById(categoryId: number): Promise<CategoryModel|null>{
-        return super.getByIdFromTable("category", categoryId, { loadParent: false, loadChildren: true, });
+    public async getById(categoryId: number, options: Partial<CategoryModelAdapterOptions> = {
+        loadSubCategories: true,
+        loadFeatures: true,
+    }): Promise<CategoryModel|null> {
+        return super.getByIdFromTable<CategoryModelAdapterOptions>("category", categoryId, options);//tabela category
     }
 
     public async add(data: IAddCategory): Promise<CategoryModel|IErrorResponse>{

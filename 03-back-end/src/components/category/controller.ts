@@ -5,16 +5,13 @@ import CategoryModel from './model';
 import { IAddCategory, IAddCategorySchemaValidator } from './dto/IAddCategory';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import { IEditCategory, IEditCategorySchemaValidator } from './dto/IEditCategory';
+import BaseController from '../../services/BaseController';
 
-class CategoryController {
-    private categoryService: CategoryService;
-
-    constructor(categoryService: CategoryService){
-        this.categoryService = categoryService;
-    }
+class CategoryController extends BaseController{
+    
 
     async getAll (req: express.Request, res: express.Response, next: express.NextFunction){
-        res.send(await this.categoryService.getAll());
+        res.send(await this.services.categoryService.getAll());
     }
 
     async getById (req: express.Request, res: express.Response, next: express.NextFunction){
@@ -25,7 +22,7 @@ class CategoryController {
             return;
         }
 
-        const item: CategoryModel | null = await this.categoryService.getById(id);
+        const item: CategoryModel | null = await this.services.categoryService.getById(id);
 
         if(item == null){
             res.sendStatus(404);
@@ -43,7 +40,7 @@ class CategoryController {
         }
 
 
-        const newCategory: CategoryModel|IErrorResponse = await this.categoryService.add(item as IAddCategory);
+        const newCategory: CategoryModel|IErrorResponse = await this.services.categoryService.add(item as IAddCategory);
 
         res.send(newCategory);
     }
@@ -61,7 +58,7 @@ class CategoryController {
             res.status(400).send(IEditCategorySchemaValidator.errors);
             return;
         }
-        const editedCategory: CategoryModel|IErrorResponse = await this.categoryService.edit(categoryId, item as IEditCategory);
+        const editedCategory: CategoryModel|IErrorResponse = await this.services.categoryService.edit(categoryId, item as IEditCategory);
 
         res.send(editedCategory);
     }
@@ -73,7 +70,7 @@ class CategoryController {
             res.status(400).send(["The category ID must be a numerical value larger than 0."]);
             return;
         }
-        res.send(await this.categoryService.delete(catetgoryId));
+        res.send(await this.services.categoryService.delete(catetgoryId));
     }
 }
 

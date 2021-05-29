@@ -8,6 +8,7 @@ interface IAddFeature{
 }
 
 const IAddFeatureSchemaValidator = ajv.compile({
+    type:"object",
     properties: { 
         name:{
             type:"string",

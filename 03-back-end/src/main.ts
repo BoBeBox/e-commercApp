@@ -10,68 +10,82 @@ import CategoryRouther from './components/category/router';
 import * as mysql2 from 'mysql2/promise';
 import { hostname } from "os";
 import Router from './router';
+import CategoryService from './components/category/service';
+import FeatureService from './components/feature/service';
+import FeatureRouter from './components/feature/router';
 
 
 async function main() {
+    const application: express.Application = express()
 
+    fs.mkdirSync(path.dirname(Config.logger.path), {
+        mode: 0o755,
+        recursive: true
+    });
 
-const application: express.Application = express()
+    application.use(morgan(":date[iso]\t:remote-addr\t:method\t:url\t:status\t:res[content-length] bytes\t:response-time ms", {
+        stream: fs.createWriteStream(Config.logger.path),
+    }));
 
-fs.mkdirSync(path.dirname(Config.logger.path), {
-    mode: 0o755,
-    recursive: true
-});
+    application.use(
 
-application.use(morgan(":date[iso]\t:remote-addr\t:method\t:url\t:status\t:res[content-length] bytes\t:response-time ms", {
-    stream: fs.createWriteStream(Config.logger.path),
-}));
+        Config.server.static.route,
+        express.static(
+            Config.server.static.path,
+            {
+                cacheControl: Config.server.static.cacheControl,
+                dotfiles: Config.server.static.dotfiles,
+                etag: Config.server.static.etag,
+                maxAge: Config.server.static.maxAge,
+                index: Config.server.static.index,
+            },
+        ),
 
-application.use(
+    );
 
-    Config.server.static.route,
-    express.static(
-        Config.server.static.path,
-        {
-            cacheControl: Config.server.static.cacheControl,
-            dotfiles: Config.server.static.dotfiles,
-            etag: Config.server.static.etag,
-            maxAge: Config.server.static.maxAge,
-            index: Config.server.static.index,
-        },
-    ),
+    application.use(cors());
+    application.use(express.json());
 
-);
+    const databaseConnection = await mysql2.createConnection ({
+            host: Config.database.host,
+            port: Config.database.port,
+            user: Config.database.user,
+            password: Config.database.password,
+            database: Config.database.database,
+            charset: Config.database.charset,
+            timezone: Config.database.timezone,
+            supportBigNumbers: true,
+        });
 
-application.use(cors());
-application.use(express.json());
+    databaseConnection.connect();
 
-const resources: IApplicationResources = {
-    databaseConnection: await mysql2.createConnection({
-        host: Config.database.host,
-        port: Config.database.port,
-        user: Config.database.user,
-        password: Config.database.password,
-        database: Config.database.database,
-        charset: Config.database.charset,
-        timezone: Config.database.timezone,
-        supportBigNumbers: true,
-    }),
-};
+    const resources: IApplicationResources = {
+        databaseConnection: databaseConnection,
+    };
 
-resources.databaseConnection.connect();
+    resources.services = {
+        categoryService: new CategoryService(resources),
+        featureService: new FeatureService(resources)
+    }
+    //Rute
+    Router.setupRoutes(
+        application,
+        resources,
+        [
+            new CategoryRouther(),
+            new FeatureRouter(),
+        ]
+    );
 
-Router.setupRoutes(
-    application,
-    resources,
-    [
-        new CategoryRouther(),
-    ]
-);
-application.use((err, req, res, next)=>{
-    res.status(err.status).send(err.type); //handle errors
-});
+    application.use((req, res)=>{
+        res.sendStatus(404);
+    });
 
-application.listen(Config.server.port);
+    application.use((err, req, res, next)=>{
+        res.status(err.status).send(err.type); //handle errors
+    });
+
+    application.listen(Config.server.port);
 }
 
 main();

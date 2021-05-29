@@ -2,15 +2,21 @@ import * as mysql2 from 'mysql2/promise';
 import { format } from 'mysql2/promise';
 import IModelAdapterOptions from '../common/IModelAdapterOprtions.Interface';
 import IModel from '../common/IModel.interface';
+import IApplicationResources from '../common/IApplicationResources.interface';
+import IServices from '../common/IServices.interface';
 export default abstract class BaseService<ReturnModel extends IModel>{
-    private database: mysql2.Connection;
+    private resources: IApplicationResources;
 
-    constructor(db: mysql2.Connection){
-        this.database = db;
+    constructor(resources: IApplicationResources){
+        this.resources = resources;
     }
 
     protected get db(): mysql2.Connection{ //ponasa se kao read-only property
-        return this.database;
+        return this.resources.databaseConnection;
+    }
+
+    protected get services(): IServices{
+        return this.resources.services;
     }
 
     abstract adaptToModel(
@@ -18,11 +24,10 @@ export default abstract class BaseService<ReturnModel extends IModel>{
         options:Partial<IModelAdapterOptions>,
     ): Promise<ReturnModel>; //adapter izmedu baze i aplikacije (transformacija podataka)
 
-    protected async getAllFromTable(
+    protected async getAllFromTable<AdapterOprtions extends IModelAdapterOptions>(
         tableName: string,
-        options: Partial<IModelAdapterOptions>={
-            loadChildren: true,
-        },
+        options: Partial<AdapterOprtions>={},
+
     ): Promise<ReturnModel[]>{
         const items: ReturnModel[] = [];
 
@@ -42,13 +47,10 @@ export default abstract class BaseService<ReturnModel extends IModel>{
         return items;
     }
 
-    protected async getByIdFromTable(
+    protected async getByIdFromTable<AdapterOprtions extends IModelAdapterOptions>(
         tableName: string,
         id: number,
-        options: Partial<IModelAdapterOptions> = {
-            loadChildren: true,
-            loadParent: true,
-        },
+        options: Partial<AdapterOprtions> = {},
     ): Promise<ReturnModel|null>{
         const sql: string = `SELECT * FROM ${tableName} WHERE ${tableName}_id = ?;`;
         const [rows, fields] = await this.db.execute(sql, [id]);
