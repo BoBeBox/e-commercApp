@@ -5,6 +5,8 @@ import CategoryModel from '../category/model';
 import { IAddFeature } from './dto/IAddFeature';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import { IEditFeature } from './dto/IEditFeature';
+import { resolve } from 'path/posix';
+import { IArticleFeatureValue } from '../article/dto/IAddArticle';
 
 class FeatureModelAdapterOptions implements IModelAdapterOptions {
     loadParentCategory: boolean = false;
@@ -27,8 +29,8 @@ class FeatureService extends BaseService<FeatureModel>{
 
         return item;
     }
-
-    public async getById(featureId: number, options: Partial<IModelAdapterOptions> = {loadParent: false, loadChildren: true}): Promise<FeatureModel|null>{
+    //prazan niz znaci da ovoj metodi mozemo i ne moramo da prosledimo taj ragument
+    public async getById(featureId: number, options: Partial<IModelAdapterOptions> = {}): Promise<FeatureModel|null>{
         return super.getByIdFromTable("feature",featureId, options);
     }
 
@@ -59,6 +61,31 @@ class FeatureService extends BaseService<FeatureModel>{
         return features;
     }
 
+    public async getAllByArticleId(articleId: number): Promise<IArticleFeatureValue[]> {
+        return new Promise<IArticleFeatureValue[]>(async resolve => {
+            const [rows, fields] = await this.db.execute(`
+                SELECT feature_id, value
+                FROM article_feature
+                WHERE article_id = ?;`, [articleId]
+                );
+
+        if(!Array.isArray(rows) || rows.length === 0){
+            resolve([]);
+            return;
+        }
+
+        const items: IArticleFeatureValue[] = [];
+
+        for(const row of rows as any[]){
+            items.push({
+                feature: await this.getById(row?.feature_id as number),
+                value: row?.value as string,
+            })
+        }
+        resolve(items);
+    });
+    }
+
     public async add(data: IAddFeature): Promise<FeatureModel|IErrorResponse>{
         return new Promise<FeatureModel|IErrorResponse>((result)=>{
             const sql: string = "INSERT feature SET name = ?, category_id = ?;";
@@ -67,7 +94,7 @@ class FeatureService extends BaseService<FeatureModel>{
                 .then(async res => {
                     const resultData: any = res;
                     const newId: number =  Number(resultData[0]?.insertId);
-                    result(await this.getById(newId, {loadParent: true}));
+                    result(await this.getById(newId, {loadParentCategories: true}));
                 })
                 .catch(err =>{
                     result({
@@ -91,7 +118,7 @@ class FeatureService extends BaseService<FeatureModel>{
                     feature_id = ?;`;
             this.db.execute(sql, [data.name, data.categoryId, id])
                 .then(async res => {
-                    result(await this.getById(id, {loadParent: true }));
+                    result(await this.getById(id, {loadParentCategories: true }));
                 })
                 .catch(err =>{
                     result({

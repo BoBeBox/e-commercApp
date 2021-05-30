@@ -7,7 +7,7 @@ import { IEditFeature, IEditFeatureSchemaValidator } from "./dto/IEditFeature";
 import BaseController from '../../services/BaseController';
 class FeatureController extends BaseController{
     async getAllInCategory(req: express.Request, res: express.Response, next: express.NextFunction){
-        const categoryId: number = +req.params?.cid; //cid ili id?
+        const categoryId: number = +req.params?.cid;
         res.send(await this.services.featureService.getAllByParentCategoryId(categoryId))
     }
 

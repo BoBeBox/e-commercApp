@@ -23,4 +23,25 @@ export default interface IConfig {
         charset: string,
         timezone: string,
     },
+    fileUploadOptions:{
+        maxFiles: number,
+        maxSize: number,
+        tempDirectory: string,
+        timeout: number,
+        uploadDestinationDirectory: string,
+        photos:{
+            limits:{
+                minWidth: number,
+                maxWidth: number,
+                minHeight: number,
+                maxHeight: number,
+            },
+            resizings:{
+                sufix: string,
+                width: number,
+                height: number,
+                fit: "cover"|"contain",
+            }[],
+        }
+    }
 }

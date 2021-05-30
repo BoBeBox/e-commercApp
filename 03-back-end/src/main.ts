@@ -13,6 +13,9 @@ import Router from './router';
 import CategoryService from './components/category/service';
 import FeatureService from './components/feature/service';
 import FeatureRouter from './components/feature/router';
+import ArticleService from './components/article/service';
+import ArticleRouter from './components/article/router';
+import fileUpload = require("express-fileupload");
 
 
 async function main() {
@@ -45,6 +48,19 @@ async function main() {
 
     application.use(cors());
     application.use(express.json());
+    application.use(fileUpload({
+        limits: {
+            fileSize: Config.fileUploadOptions.maxSize,
+            files: Config.fileUploadOptions.maxFiles
+        },
+        tempFileDir: Config.fileUploadOptions.tempDirectory,
+        uploadTimeout: Config.fileUploadOptions.timeout,
+        useTempFiles: true,
+        safeFileNames: true,
+        preserveExtension: true,
+        abortOnLimit: true,
+        createParentPath: true,
+    }));
 
     const databaseConnection = await mysql2.createConnection ({
             host: Config.database.host,
@@ -65,7 +81,8 @@ async function main() {
 
     resources.services = {
         categoryService: new CategoryService(resources),
-        featureService: new FeatureService(resources)
+        featureService: new FeatureService(resources),
+        articleService: new ArticleService(resources),
     }
     //Rute
     Router.setupRoutes(
@@ -74,6 +91,7 @@ async function main() {
         [
             new CategoryRouther(),
             new FeatureRouter(),
+            new ArticleRouter(),
         ]
     );
 
