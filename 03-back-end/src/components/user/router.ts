@@ -12,5 +12,6 @@ export default class UserRouter implements IRouter{
         application.post("/api/user", userController.add.bind(userController));
         application.put("/api/user/:id", userController.editById.bind(userController));
         application.delete("/api/user/:id", userController.deleteById.bind(userController));
+        application.post("/api/user/register", userController.register.bind(userController));
     }
 }

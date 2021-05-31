@@ -1,4 +1,11 @@
 import IConfig from "../common/IConfig.interface";
+import * as dotenv from "dotenv";
+
+const envResult = dotenv.config();
+
+if (envResult.error) {
+    throw "The environment path with additional information could not be parsed. Error: " + envResult.error;
+}
 
 const Config: IConfig = {
     server: {
@@ -53,6 +60,15 @@ const Config: IConfig = {
             },],
         },
     },
+    mail: {
+        hostname: process.env?.MAIL_HOST,
+        port: +(process.env?.MAIL_PORT),
+        secure: process.env?.MAIL_SECURE === "true",
+        fromEmail: process.env?.MAIL_FROM,
+        username: process.env?.MAIL_USER,
+        password: process.env?.MAIL_PASS,
+        debug: true,
+    }
 }
 
 export default Config;

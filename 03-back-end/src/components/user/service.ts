@@ -16,7 +16,7 @@ class UserService extends BaseService<UserModel>{
     ): Promise<UserModel>{
         const item: UserModel = new UserModel();
         item.userId = Number(data?.user_id);
-        item.username = data?.email;
+        item.email = data?.email;
         item.passwordHash = data?.password_hash;
         item.forename = data?.forename;
         item.surname = data?.surname;
