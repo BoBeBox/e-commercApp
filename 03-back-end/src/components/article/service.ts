@@ -5,6 +5,9 @@ import { resolve } from 'path/posix';
 import { IAddArticle, IUploadPhoto } from './dto/IAddArticle';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import { IEditArticle } from './dto/IEditArticle';
+import Config from '../../config/dev';
+import * as fs from 'fs';
+import * as path from 'path';
 
 class ArticleModelAdapterOptions implements IModelAdapterOptions {
     loadCategory: boolean = false;
@@ -354,6 +357,200 @@ class ArticleService extends BaseService<ArticleModel>{
                         message: err?.sqlMessage,
                     });
                 });
+            })
+            .catch(err => {
+                resolve({
+                    errorCode: err?.errno,
+                    message: err?.sqlMessage,
+                });
+            });
+        });
+    }
+
+    public async delete(articleId: number): Promise<IErrorResponse>{
+        return new Promise<IErrorResponse>(async resolve => {
+            const currentArticle = await this.services.articleService.getById(articleId, {
+                loadPhotos: true,
+            });
+
+            let imagePathsToDelete = [];
+
+            this.db.beginTransaction()
+                .then(async () => {
+                    if (await this.delateArticlePrices(articleId)) {
+                        return;
+                    }
+
+                    throw {
+                        errno: -100,
+                        sqlMessage: 'Could NOT delete prices of articles',
+                    };
+                })
+                .then(async () => {
+                    if (await this.delateArticleFeatureValues(articleId)) {
+                        return;
+                    }
+
+                    throw {
+                        errno: -100,
+                        sqlMessage: 'Could NOT delete values of articles',
+                    };
+                })
+                .then(async () => {
+                    if (await this.delateArticleCartEntries(articleId)) {
+                        return;
+                    }
+
+                    throw {
+                        errno: -100,
+                        sqlMessage: 'Could NOT delete records of articles in existing carts.',
+                    };
+                })
+                .then(async () => {
+                    const deletedPhotos = await this.delateArticlePhotos(articleId);
+
+                    if (deletedPhotos === false) {
+                        throw {
+                            errno: -100,
+                            sqlMessage: 'Could NOT delete article photos. Files will not be deleted.',
+                        };
+                    }
+
+                    imagePathsToDelete = deletedPhotos;
+                })
+                .then(async () => {
+                    const result = await this.deleteArticleRecord(articleId);
+
+                    if (result === true) {
+                        return;
+                    }
+
+                    throw result;
+                })
+                .then(async () => {
+                    await this.db.commit();
+                })
+                .then(() => {
+                    for (const path of imagePathsToDelete) {
+                        this.deletePhotoAndResizedVersions(path);
+                    }
+
+                    return true;
+                })
+                .then(() => {
+                    resolve({
+                        errorCode: 0,
+                        message: "Article has been deleted.",
+                    });
+                })
+                .catch(async err => {
+                    await this.db.rollback();
+
+                    resolve({
+                        errorCode: err?.errno,
+                        message: err?.sqlMessage,
+                    });
+                });
+        });
+    }
+    
+    private async delateArticlePrices(articleId: number): Promise<boolean> {
+        return new Promise<boolean>(async resolve => {
+            this.db.execute(
+                `DELETE FROM article_price WHERE article_id = ?;`,
+                [ articleId,]
+            )
+            .then(() => {
+                resolve(true);
+            })
+            .catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
+    private async delateArticleFeatureValues(articleId: number): Promise<boolean> {
+        return new Promise<boolean>(async resolve => {
+            this.db.execute(
+                `DELETE FROM article_feature WHERE article_id = ?;`,
+                [ articleId, ]
+            )
+            .then(() => {
+                resolve(true);
+            })
+            .catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
+    private async delateArticlePhotos(articleId: number): Promise<string[]|false> {
+        return new Promise<string[]|false>(async resolve => {
+            const [ rows ] = await this.db.execute(
+                `SELECT image_path FROM photo WHERE article_id = ?;`,
+                [ articleId, ]
+            );
+
+            if (!Array.isArray(rows) || rows.length === 0) {
+                resolve([]);
+                return;
+            }
+
+            const filesToDelete: string[] = (rows as any[]).map(row => row?.image_path as string);
+
+            this.db.execute(
+                `DELETE FROM photo WHERE article_id = ?;`,
+                [ articleId, ]
+            )
+            .then(() => {//Brisanje samo iz baze prvo, bez direktorijuma
+                resolve(filesToDelete);
+            })
+            .catch(() => {
+                resolve(false);
+            });
+        });
+    }
+
+    private deletePhotoAndResizedVersions(imagePath: string) {
+        try {
+            fs.unlinkSync(imagePath);
+
+            for (const resizeSpecification of Config.fileUploadOptions.photos.resizings) {
+                const parsedFilename = path.parse(imagePath);
+                const directory = parsedFilename.dir;
+                const namePart  = parsedFilename.name;
+                const extPart   = parsedFilename.ext;
+
+                const resizedVersionPath = directory + "/" + namePart + resizeSpecification.sufix + extPart;
+
+                fs.unlinkSync(resizedVersionPath);
+            }
+        } catch (e) { }
+    }
+
+    private async delateArticleCartEntries(articleId: number): Promise<boolean> {
+        return new Promise<boolean>(async resolve => {
+            this.db.execute(
+                `DELETE FROM cart_article WHERE article_id = ?;`,
+                [ articleId, ]
+            )
+            .then(() => {
+                resolve(true);
+            })
+            .catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
+    private async deleteArticleRecord(articleId: number): Promise<IErrorResponse|true> {
+        return new Promise<IErrorResponse|true>(resolve => {
+            this.db.execute(
+                `DELETE FROM article WHERE article_id = ?;`,
+                [ articleId, ]
+            )
+            .then(() => {
+                resolve(true);
             })
             .catch(err => {
                 resolve({

@@ -174,6 +174,24 @@ class ArticleController extends BaseController {
 
         res.send(result);
     }
+
+    async delete(req: express.Request, res: express.Response, next: express.NextFunction) {
+        const id: number = +(req.params?.id);
+
+        if (id <= 0) {
+            res.sendStatus(404);
+            return;
+        }
+
+        const item: ArticleModel| null = await this.services.articleService.getById(id);
+
+        if (item == null) {
+            res.sendStatus(404);
+            return;
+        }
+
+        res.send(await this.services.articleService.delete(id));
+    }
 }
 
 export default ArticleController;
