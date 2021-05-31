@@ -1,5 +1,6 @@
 import IConfig from "../common/IConfig.interface";
 import * as dotenv from "dotenv";
+import { readFileSync } from "fs";
 
 const envResult = dotenv.config();
 
@@ -68,6 +69,37 @@ const Config: IConfig = {
         username: process.env?.MAIL_USER,
         password: process.env?.MAIL_PASS,
         debug: true,
+    },
+    auth: {
+        user: {
+            issuer: "Praktikum Web Application",
+            algorithm: "RS256",
+            authToken: {
+                duration: 60 * 60 * 24,
+                publicKey: readFileSync("keystore/user-auth.public", "ascii"),
+                privateKey: readFileSync("keystore/user-auth.private", "ascii"),
+            },
+            refreshToken: {
+                duration: 60 * 60 * 24,
+                publicKey: readFileSync("keystore/user-refresh.public", "ascii"),
+                privateKey: readFileSync("keystore/user-refresh.private", "ascii"),
+            }
+        },
+        administrator: {
+            issuer: "Praktikum Web Application",
+            algorithm: "RS256",
+            authToken: {
+                duration: 60 * 60 * 24, //realno 30min ali zbog testiranja stavljeno vise
+                publicKey: readFileSync("keystore/administrator-auth.public", "ascii"),
+                privateKey: readFileSync("keystore/administrator-auth.private", "ascii"),
+            },
+            refreshToken: {
+                duration: 60 * 60 * 24,
+                publicKey: readFileSync("keystore/administrator-auth-refresh.public", "ascii"),
+                privateKey: readFileSync("keystore/administrator-auth-refresh.private", "ascii"),
+            }
+        },
+        allowRequestsEvenWithoutValidTokens: false,
     }
 }
 

@@ -1,3 +1,18 @@
+import { Algorithm } from "jsonwebtoken";
+interface AuthTokenOptions {
+    authToken: {
+        publicKey: string,
+        privateKey: string,
+        duration: number,
+    },
+    refreshToken: {
+        publicKey: string,
+        privateKey: string,
+        duration: number,
+    },
+    issuer: string,
+    algorithm: Algorithm,
+};
 export default interface IConfig {
     server: {
         port: number,
@@ -52,5 +67,10 @@ export default interface IConfig {
         username: string,
         password: string,
         debug: boolean,
-    }
+    },
+    auth: {
+        user: AuthTokenOptions,
+        administrator: AuthTokenOptions,
+        allowRequestsEvenWithoutValidTokens: boolean;
+    },
 }

@@ -34,6 +34,16 @@ class UserService extends BaseService<UserModel>{
         return super.getByIdFromTable<UserModelAdapterOptions>("user", id, options);
     }
 
+    public async getByEmail(email: string, options: Partial<UserModelAdapterOptions> = {}): Promise<UserModel|null> {
+        const result = await super.getByFieldIdFromTable<UserModelAdapterOptions>("user", "email", email, options);
+
+        if (!Array.isArray(result) || result.length === 0) {
+            return null;
+        }
+
+        return result[0];
+    }
+
     public async add(data: IAddUser): Promise<UserModel|IErrorResponse> {
         return new Promise<UserModel|IErrorResponse>((result) => {
 

@@ -20,6 +20,7 @@ import AdministratorRouter from './components/aministrator/router';
 import UserService from './components/user/service';
 import fileUpload = require("express-fileupload");
 import UserRouter from "./components/user/router";
+import AuthRouter from './components/auth/router';
 
 
 async function main() {
@@ -100,6 +101,7 @@ async function main() {
             new ArticleRouter(),
             new AdministratorRouter(),
             new UserRouter(),
+            new AuthRouter(),
         ]
     );
 
