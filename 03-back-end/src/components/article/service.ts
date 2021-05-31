@@ -560,6 +560,51 @@ class ArticleService extends BaseService<ArticleModel>{
             });
         });
     }
+    public async deleteArticlePhoto(articleId: number, photoId: number): Promise<IErrorResponse|null> {
+        return new Promise<IErrorResponse|null>(async resolve => {
+            const article = await this.getById(articleId, {
+                loadPhotos: true,
+            });
+
+            if (article === null) {
+                return resolve(null);
+            }
+
+            if (article.photos.length === 1) {
+                return resolve({
+                    errorCode: -1023,
+                    message: 'Cannot delete this photo. An article must have one photo at least.',
+                });
+            }
+
+            const photos = article.photos.filter(photo => photo.photoId === photoId);
+
+            if (photos.length === 0) {
+                return resolve(null);
+            }
+
+            const photo = photos[0];
+
+            this.db.execute(
+                `DELETE FROM photo WHERE photo_id = ?;`,
+                [ photo.photoId, ]
+            )
+            .then(() => {
+                this.deletePhotoAndResizedVersions(photo.imagePath);
+
+                resolve({
+                    errorCode: 0,
+                    message: 'Photo has been deleted',
+                });
+            })
+            .catch(err => {
+                resolve({
+                    errorCode: err?.errno,
+                    message: err?.sqlMessage,
+                });
+            });
+        });
+    }
 }
 
 export default ArticleService;
