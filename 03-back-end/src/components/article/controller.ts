@@ -192,7 +192,7 @@ class ArticleController extends BaseController {
 
         res.send(await this.services.articleService.delete(id));
     }
-    
+
     async deleteArticlePhoto(req: express.Request, res: express.Response) {
         const aid: number = +(req.params?.aid);
 
@@ -216,6 +216,30 @@ class ArticleController extends BaseController {
         }
 
         res.send(result);
+    }
+
+    public async addArticlePhotos(req: express.Request, res: express.Response) {
+        const id: number = +(req.params?.id);
+
+        if (id <= 0) {
+            res.sendStatus(404);
+            return;
+        }
+
+        const article = await this.services.articleService.getById(id);
+
+        if (article == null) {
+            res.sendStatus(404);
+            return;
+        }
+
+        const uploadedPhotos = await this.getUploadPhotos(req, res);
+
+        if (uploadedPhotos.length === 0) {
+            return;
+        }
+
+        res.send(await this.services.articleService.addArticlePhotos(id, uploadedPhotos));
     }
 }
 

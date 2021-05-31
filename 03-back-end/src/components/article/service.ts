@@ -605,6 +605,46 @@ class ArticleService extends BaseService<ArticleModel>{
             });
         });
     }
+
+    public async addArticlePhotos(articleId: number, uploadedPhotos: IUploadPhoto[]): Promise<ArticleModel|IErrorResponse|null> {
+        return new Promise<ArticleModel|IErrorResponse|null>(resolve => {
+            this.db.beginTransaction()
+                .then(() => {
+                    const promises = [];
+
+                    for (const photo of uploadedPhotos) {
+                        promises.push(
+                            this.db.execute(
+                                `INSERT photo SET article_id = ?, image_path = ?;`,
+                                [ articleId, photo.imagePath, ],
+                            )
+                        );
+                    }
+
+                    Promise
+                        .all(promises)
+                        .then(async () => {
+                            await this.db.commit();
+                        })
+                        .then(async () => {
+                            resolve(await this.getById(articleId, {
+                                loadPhotos: true,
+                            }));
+                        })
+                        .catch(err => {
+                            throw err;
+                        })
+                })
+                .catch(async err => {
+                    await this.db.rollback();
+
+                    resolve({
+                        errorCode: err?.errno,
+                        message: err?.sqlMessage,
+                    });
+                });
+        });
+    }
 }
 
 export default ArticleService;

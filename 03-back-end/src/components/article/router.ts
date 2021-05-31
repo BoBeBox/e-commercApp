@@ -11,5 +11,6 @@ export default class ArticleRouter implements IRouter{
         application.put("/api/article/:id", articleController.edit.bind(articleController));
         application.delete("/api/article/:id", articleController.delete.bind(articleController));
         application.delete("/api/article/:aid/photo/:pid", articleController.deleteArticlePhoto.bind(articleController));
+        application.post("/api/article/:id/photo/", articleController.addArticlePhotos.bind(articleController));
     }
 }
