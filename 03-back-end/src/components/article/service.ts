@@ -4,6 +4,7 @@ import IModelAdapterOptions from '../../common/IModelAdapterOprtions.Interface';
 import { resolve } from 'path/posix';
 import { IAddArticle, IUploadPhoto } from './dto/IAddArticle';
 import IErrorResponse from '../../common/IErrorResponse.interface';
+import { IEditArticle } from './dto/IEditArticle';
 
 class ArticleModelAdapterOptions implements IModelAdapterOptions {
     loadCategory: boolean = false;
@@ -239,6 +240,127 @@ class ArticleService extends BaseService<ArticleModel>{
                             
                     });
                 });
+        });
+    }
+    
+    public async edit(articleId: number, data: IEditArticle): Promise<ArticleModel|IErrorResponse|null> {
+        return new Promise<ArticleModel|IErrorResponse>(async(resolve) => {
+            const currentArticle = await this.getById(articleId, {
+                loadFeature: true,
+            });
+            if(currentArticle === null){
+                resolve(null);
+                return;
+            }
+            this.db.beginTransaction()
+            .then(() => {
+                this.db.execute(
+                    `UPDATE
+                        article
+                    SET
+                        name = ?,
+                        excerpt = ?,
+                        description = ?,
+                        status = ?,
+                        is_promoted = ?;`,
+                        [
+                            data.name,
+                            data.excerpt,
+                            data.description,
+                            data.status,
+                            data.isPromoted ? 1 : 0,
+                        ],
+                ).then(async (res: any) => {
+                    const promises = [];
+
+                //Menja cenu samo ako je drugacija od trenutne
+                if((+(currentArticle.currentPrice)).toFixed(2) !== (+(data.price)).toFixed(2)){ //poredjenja cena
+                    promises.push(
+                        this.db.execute(
+                            `INSERT
+                                article_price
+                            SET
+                                article_id = ?,
+                                price = ?,
+                                created_at = NOW();`,
+                                [
+                                    articleId,
+                                    data.price,
+                                ]
+                        )
+                    );
+                }
+                //uklanjanje features koje nemaju vise vrednost
+                const willHaveFeatures = data.features.map(fv => fv.featureId);
+                const hasFeatures = currentArticle.features.map(f => f.feature.featureId);
+
+                for(const curruentFeature of hasFeatures){
+                    if(!willHaveFeatures.includes(curruentFeature)){
+                        promises.push(
+                            this.db.execute(
+                                `DELETE FROM article_feature
+                                WHERE article_id = ? AND feature_id = ?;`,
+                                [ articleId, curruentFeature ]
+                            )
+                        );
+                    }
+                }
+                //menjanje article feature ako ima promena
+                for(const featureValue of data.features){
+                    promises.push(
+                        this.db.execute(
+                            `INSERT
+                                article_feature
+                            SET
+                                article_id = ?,
+                                feature_id = ?,
+                                value = ?
+                            ON DUPLICATE KEY
+                            UPDATE
+                            value = ?;`,
+                            [
+                                articleId,
+                                featureValue.featureId,
+                                featureValue.value,
+                                featureValue.value,
+                            ]
+                        )
+                    );
+                }
+                //cekanje promisa
+                Promise
+                    .all(promises)
+                    .then(() => {
+                        this.db.commit()
+                            .then(async () => {
+                                resolve(await this.getById(articleId, {
+                                    loadCategory: true,
+                                    loadFeature: true,
+                                    loadPrices: true,
+                                    loadPhotos: true,
+                                }));
+                            });
+                    })
+                    .catch(err => {
+                        resolve({
+                            errorCode: err?.errno,
+                            message: err?.sqlMessage,
+                        });
+                    })
+                })
+                .catch(err => {
+                    resolve({
+                        errorCode: err?.errno,
+                        message: err?.sqlMessage,
+                    });
+                });
+            })
+            .catch(err => {
+                resolve({
+                    errorCode: err?.errno,
+                    message: err?.sqlMessage,
+                });
+            });
         });
     }
 }

@@ -10,6 +10,7 @@ import * as fs from 'fs';
 import sizeOf from "image-size";
 import * as path from 'path';
 import sharp = require('sharp');
+import { IEditArticle, IEditArticleSchemaValidator } from './dto/IEditArticle';
 
 class ArticleController extends BaseController {
     async getById(req: express.Request, res: express.Response, next: express.NextFunction){
@@ -150,6 +151,28 @@ class ArticleController extends BaseController {
         }
         const newArticle: ArticleModel|IErrorResponse = await this.services.articleService.add(item as IAddArticle, uploadPhotos);
         res.send(newArticle);
+    }
+
+    async edit(req: express.Request, res: express.Response, next: express.NextFunction){
+        const item = req.body;
+        const id: number = +(req.params?.id);
+
+        if(id <= 0){
+            res.sendStatus(404);
+            return;
+        }
+        if(!IEditArticleSchemaValidator(req.body)){
+            res.status(400).send(IEditArticleSchemaValidator.errors);
+            return;
+        }
+        const result: ArticleModel|IErrorResponse|null = await this.services.articleService.edit(id, item as IEditArticle);
+
+        if(result === null){
+            res.status(404);
+            return;
+        }
+
+        res.send(result);
     }
 }
 
