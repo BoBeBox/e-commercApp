@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import TopMenu from "../TopMenu/TopMenu";
 import ContactPage from "../ContactPage/ContactPage";
 import HomePage from "../HomePage/HomePage";
+import CategoryPage from '../CategoryPage/CategoryPage';
 
 export default function Application(){
     return (
@@ -27,6 +28,7 @@ export default function Application(){
                                         address="Svetosavska 23, Kikinda"
                                     />
                                 </Route>
+                                <Route exact path="/category/:cid" component={CategoryPage} />
                             </Switch>
                         </Suspense>
                     </div>

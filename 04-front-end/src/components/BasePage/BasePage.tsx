@@ -2,10 +2,11 @@ import { Component, ReactNode } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 
 export class PageProperties{
-    sidebar?: ReactNode
+    sidebar?: ReactNode;
+    match?: any;
 }
 
-export default abstract class BasePage<Properties extends PageProperties> extends Component<Properties> {
+export default abstract class BasePage<Properties extends PageProperties> extends Component<Properties, {}> {
     public constructor(
         props: Properties,
     ) {
