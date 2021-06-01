@@ -99,7 +99,7 @@ const Config: IConfig = {
                 privateKey: readFileSync("keystore/administrator-auth-refresh.private", "ascii"),
             }
         },
-        allowRequestsEvenWithoutValidTokens: false,
+        allowRequestsEvenWithoutValidTokens: true,
     }
 }
 
