@@ -74,4 +74,18 @@ export default class CartController extends BaseController {
 
         res.send(order);
     }
+
+    public async getAllOrders(req: Request, res: Response) {
+        res.send(await this.services.cartService.getAllOrders());
+    }
+
+    public async getAllOrdersByUserId(req: Request, res: Response) {
+        res.send(await this.services.cartService.getAllOrdersByUserId(+req.params?.uid));
+    }
+
+    public async getAllOrdersForCurrentUser(req: Request, res: Response) {
+        if (this.checkUserIdentity(req, res) === false) return;
+
+        res.send(await this.services.cartService.getAllOrdersByUserId(req.authorized?.id));
+    }
 }

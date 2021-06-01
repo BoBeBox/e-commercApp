@@ -30,5 +30,23 @@ export default class CartRouter implements IRouter{
             AuthMiddleware.getVerifier("user"),
             cartController.makeOrder.bind(cartController),
         );
+
+        application.get(
+            "/api/order",
+            AuthMiddleware.getVerifier("administrator"),
+            cartController.getAllOrders.bind(cartController),
+        );
+
+        application.get(
+            "/api/user/:uid/order",
+            AuthMiddleware.getVerifier("administrator"),
+            cartController.getAllOrdersByUserId.bind(cartController),
+        );
+
+        application.get(
+            "/api/order/my",
+            AuthMiddleware.getVerifier("user"),
+            cartController.getAllOrdersForCurrentUser.bind(cartController),
+        );
     }
 }

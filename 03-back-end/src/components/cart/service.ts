@@ -224,6 +224,44 @@ class CartService extends BaseService<CartModel> {
             });
         });
     }
+
+    public async getAllOrders(): Promise<CartModel[]> {
+        const [ rows ] = await this.db.execute(
+            `SELECT * FROM cart
+            INNER JOIN \`order\` ON \`order\`.cart_id = cart.cart_id
+            ORDER BY \`order\`.created_at DESC;`
+        );
+
+        if (!Array.isArray(rows) || rows.length === 0) {
+            return [];
+        }
+
+        return Promise.all((rows as any[]).map(row => this.adaptToModel(row, {
+            loadArticles: true,
+            loadOrder: true,
+            loadUser: true,
+        })));
+    }
+
+    public async getAllOrdersByUserId(userId: number): Promise<CartModel[]> {
+        const [ rows ] = await this.db.execute(
+            `SELECT * FROM cart
+            INNER JOIN \`order\` ON \`order\`.cart_id = cart.cart_id
+            WHERE cart.user_id = ?
+            ORDER BY \`order\`.created_at DESC;`,
+            [ userId ]
+        );
+
+        if (!Array.isArray(rows) || rows.length === 0) {
+            return [];
+        }
+
+        return Promise.all((rows as any[]).map(row => this.adaptToModel(row, {
+            loadArticles: true,
+            loadOrder: true,
+            loadUser: true,
+        })));
+    }
 }
 
 export default CartService;

@@ -3,6 +3,10 @@ import Config from '../config/dev';
 import * as jwt from 'jsonwebtoken';
 import ITokenData from '../components/auth/dto/ITokenData.interface';
 
+interface TokenValidationInformation {
+    isValid: boolean;
+    data: any;
+}
 export default class AuthMiddleware {
     private static verifyAuthToken(req: Request, res: Response, next: NextFunction, allowedRoles: ("user"|"administrator")[]) {
         if (typeof req.headers.authorization !== "string") {
@@ -25,35 +29,56 @@ export default class AuthMiddleware {
             return res.status(400).send("Invalid auth token length.");
         }
 
+        const userTokenValidation = this.validateTokenAsTokenByRole(tokenString, "user");
+        const administratorTokenValidation = this.validateTokenAsTokenByRole(tokenString, "administrator");
+
         let result;
 
-        try {
-            result = jwt.verify(tokenString.trim(), Config.auth.user.authToken.publicKey.trim(), {
-                issuer: Config.auth.user.issuer,
-                algorithms: [ Config.auth.user.algorithm, ]
-            });
-        } catch (e) {
-            return res.status(500).send("Token validation error: " + e?.message);
+        if (userTokenValidation.isValid === false && administratorTokenValidation.isValid === false) {
+            return res.status(401).send("Token validation error: " + JSON.stringify(userTokenValidation) + " " + JSON.stringify(administratorTokenValidation));
+        }
+
+        if (userTokenValidation.isValid) {
+            result = userTokenValidation.data;
+        } else {
+            result = administratorTokenValidation.data;
         }
 
         if (typeof result !== "object") {
-            return res.status(400).send("Bad auth token data.");
+            return res.status(401).send("Bad auth token data.");
         }
 
-        req.authorized = result as ITokenData;
+        const data: ITokenData = result as ITokenData;
 
-        if (!allowedRoles.includes(req.authorized?.role)) {
-            return res.status(401).send("Access denied to this role.");
+        if (!allowedRoles.includes(data.role)) {
+            return res.status(403).send("Access denied to this role.");
         }
+
+        req.authorized = data;
 
         next();
     }
 
-    public static getVerifier(
-        ...allowedRoles:("user"|"administrator")[]
-    ): (req: Request, res: Response, next: NextFunction) => void{
-        return(req: Request, res: Response, next: NextFunction) =>{
-        this.verifyAuthToken(req,res,next,allowedRoles);
+    private static validateTokenAsTokenByRole(tokenString: string, role: ("user"|"administrator")): TokenValidationInformation {
+        try {
+            const result = jwt.verify(tokenString, Config.auth[role].authToken.publicKey);
+            return {
+                isValid: true,
+                data: result,
+            };
+        } catch (e) {
+            return {
+                isValid: false,
+                data: e?.message,
+            };
         }
+    }
+
+    public static getVerifier(
+        ...allowedRoles: ("user"|"administrator")[]
+    ): (req: Request, res: Response, next: NextFunction) => void {
+        return (req: Request, res: Response, next: NextFunction) => {
+            this.verifyAuthToken(req, res, next, allowedRoles);
+        };
     }
 }

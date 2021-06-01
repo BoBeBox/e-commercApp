@@ -31,7 +31,7 @@ export default abstract class BaseService<ReturnModel extends IModel>{
     ): Promise<ReturnModel[]>{
         const items: ReturnModel[] = [];
 
-        const sql: string = `SELECT * FROM ${tableName};`;
+        const sql: string = `SELECT * FROM \`${tableName}\`;`;
         const [rows, fields] = await this.db.execute(sql);
 
         if(Array.isArray(rows)){
@@ -52,7 +52,7 @@ export default abstract class BaseService<ReturnModel extends IModel>{
         id: number,
         options: Partial<AdapterOprtions> = {},
     ): Promise<ReturnModel|null>{
-        const sql: string = `SELECT * FROM ${tableName} WHERE ${tableName}_id = ?;`;
+        const sql: string = `SELECT * FROM \`${tableName}\` WHERE \`${tableName}_id\` = ?;`;
         const [rows, fields] = await this.db.execute(sql, [id]);
 
         if(!Array.isArray(rows)){
@@ -77,10 +77,10 @@ export default abstract class BaseService<ReturnModel extends IModel>{
     ): Promise<ReturnModel[]> {
         const items: ReturnModel[] = [];
 
-        let sql: string = `SELECT * FROM ${tableName} WHERE ${fieldName} = ?;`;
+        let sql: string = `SELECT * FROM \`${tableName}\` WHERE \`${fieldName}\` = ?;`;
 
         if (fieldValue === null) {
-            sql = `SELECT * FROM ${tableName} WHERE ${fieldName} IS NULL;`;
+            sql = `SELECT * FROM \`${tableName}\` WHERE \`${fieldName}\` IS NULL;`;
         }
 
         const [ rows, fields ] = await this.db.execute(sql, [fieldValue]);
