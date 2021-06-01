@@ -21,6 +21,8 @@ import UserService from './components/user/service';
 import fileUpload = require("express-fileupload");
 import UserRouter from "./components/user/router";
 import AuthRouter from './components/auth/router';
+import CartService from './components/cart/service';
+import CartRouter from './components/cart/router';
 
 
 async function main() {
@@ -90,6 +92,7 @@ async function main() {
         articleService: new ArticleService(resources),
         administratorService: new AdministratorService(resources),
         userService: new UserService(resources),
+        cartService: new CartService(resources),
     }
     //Rute
     Router.setupRoutes(
@@ -102,6 +105,7 @@ async function main() {
             new AdministratorRouter(),
             new UserRouter(),
             new AuthRouter(),
+            new CartRouter(),
         ]
     );
 
