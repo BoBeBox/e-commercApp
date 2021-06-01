@@ -53,7 +53,10 @@ async function main() {
 
     );
 
-    application.use(cors());
+    application.use(cors({
+        origin: "http://localhost:3000",
+        credentials: true,
+    }));
     application.use(express.json());
     application.use(fileUpload({
         limits: {
