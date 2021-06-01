@@ -20,7 +20,7 @@ export default abstract class BasePage<Properties extends PageProperties> extend
             <Container>
                 <Row>
                     <Col className="page-body" sm={12} md={12 - sidebarMd} lg={12 - sidebarLg}>
-                        
+                        {this.renderMain()}
                     </Col>
                     <Col className="page-sidebar" sm={12} md={sidebarMd} lg={sidebarLg}>
                         { this.props.sidebar }

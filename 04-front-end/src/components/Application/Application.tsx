@@ -13,7 +13,7 @@ export default function Application(){
 
                 <div className="Application">
                     <header className="Application-header">
-                        Electronic Equipment Shop
+                        Carpet Store
                     </header>
 
                     <div className="Application-body">

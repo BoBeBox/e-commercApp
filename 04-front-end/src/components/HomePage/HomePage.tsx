@@ -3,8 +3,8 @@ export default class HomePage extends BasePage<{}> {
     renderMain(): JSX.Element {
         return (
             <div className="pageHolder">
-                <h1>Home page</h1>
-                <p>Not much here yet...</p>
+                <h1>BeBox Carpets</h1>
+                <p>Dobrodošli!</p>
             </div>
         );
     }
