@@ -1,5 +1,7 @@
 import BasePage, { PageProperties } from '../BasePage/BasePage';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import CategoryModel from '../../../../03-back-end/src/components/category/model';
 class CategoryPageProperties extends PageProperties {
     match?: {
         params: {
@@ -9,67 +11,120 @@ class CategoryPageProperties extends PageProperties {
 }
 
 class CategoryPageState {
-    categoryId?: number|null = null;
     title: string = "";
-    subcategories: number[] = [];
+    isTopLevelCategory: boolean = true;
+    parentCategoryId: number|null = null;
+    subcategories: CategoryModel[] = [];
 }
 
 export default class CategoryPage extends BasePage<CategoryPageProperties>{
-    state: CategoryPageState = {
-        title: "",
-        subcategories: [],
-    };
+    state: CategoryPageState;
 
-    private categoryIdUpdated(){
-        const cid = this.props.match?.params.cid;
+    constructor(props:CategoryPageProperties){
+        super(props);
 
-        this.setState({
-            categoryId: cid ? +cid : null,
-            title: this.props.match?.params.cid
-                ? `Subcategories of category ${this.props.match?.params.cid}`
-                : "Top Level Categories",
+        this.state = {
+            title: "Loading...",
+            isTopLevelCategory: true,
+            parentCategoryId: null,
             subcategories: [],
-        });
-        this.getDataFromTheApi(this.state.categoryId??null);
+        };
     }
 
-    private getDataFromTheApi(parentCategoryId:number|null){
-        setTimeout(()=> {
-            this.setState({
-            subcategories: [
-                +(this.state.categoryId ?? 0) + 10,
-                +(this.state.categoryId ?? 0) + 12,
-                +(this.state.categoryId ?? 0) + 13,
-                +(this.state.categoryId ?? 0) + 17,
-                +(this.state.categoryId ?? 0) + 56,
-            ],
-        });
-    }, 1000);
+    private getCategoryIdFromProps(props: CategoryPageProperties): number|null {
+        const paramCid = props.match?.params.cid;
+        return paramCid ? Number(paramCid) : null;
     }
+
+    private CategoryData(){
+        let paramCategoryId = this.getCategoryIdFromProps(this.props);
+        let urlCategoryIdPart = paramCategoryId ?? '';
+
+        axios({
+            method:'get',
+            baseURL:'http://localhost:40080/api',
+            url: '/category/'+ urlCategoryIdPart,
+            timeout: 10000,
+            responseType:'text',
+            headers:{
+                Autorization: 'Fake-TOKEN',
+            },
+            withCredentials: true,
+            maxRedirects: 0,
+        })
+        .then(res => {
+            if(Array.isArray(res.data)){
+                return this.setState({
+                    parentCategoryId: null,
+                    isTopLevelCategory: true,
+                    title:"Categories",
+                    subcategories: res.data,
+                });
+            }
+            if(typeof res.data !== "object"){
+                throw new Error("Invalid data recieved!");
+            }
+            this.setState({
+                parentCategoryId: res.data.parentCategoryId,
+                isTopLevelCategory: false,
+                title: res.data.name,
+                subcategories: res.data.subcategories,
+            });
+        })
+        .catch(err => {
+            if((err + "").includes("404")){
+                return this.setState({
+                    titel: "Category not found",
+                    subcateogires: [],
+                })
+            }
+            this.setState({
+                titel:"Unable to load category",
+                subcategories: [],
+            })
+        })
+    }
+
     //poziva se kada se komponenta ugradi u stranicu, kada se prikaze
     componentDidMount(){
-        this.categoryIdUpdated();
+        this.CategoryData();
     }
     //poziva se svaki put put kako dodje do promene stanja ili osobine komponente
-    componentDidUpdate(){
-        const cid = this.props.match?.params.cid ? +(this.props.match?.params.cid):null
+    componentDidUpdate(prevProps: CategoryPageProperties, prevState: CategoryPageState) {
+        let odlCategoryId = this.getCategoryIdFromProps(prevProps);
+        let currentCategoryId = this.getCategoryIdFromProps(this.props);
 
-        if(this.state.categoryId !==cid){
-            this.categoryIdUpdated();
+        console.log('updated: ', odlCategoryId, currentCategoryId)
+
+        if(odlCategoryId !== currentCategoryId){
+            this.CategoryData();
         }
     }
 
     renderMain(): JSX.Element {
+        let pid = ""+ this.state.parentCategoryId;
+
+        if(pid ==="null"|| pid ==="0") pid = "";
         return (
             <div className="pageHolder">
-                <h1>{this.state.title}</h1>
-                <p>Za sad neke pod kategorije:</p>
+                <h1>
+                    {
+                    this.state.isTopLevelCategory === false ?
+                    (
+                        <Link className = "text-decoration-name" 
+                        to={"/category/"+pid}>
+                            &laquo; Back |
+                        </Link>
+                    )
+                    : ""
+                    }
+                </h1>
                     <ul>
                         {
-                            this.state.subcategories.map(catId =>(
-                                <li key={"subcategory-item-link-" + catId}>
-                                    <Link className="nav-link" to={"/category/"+catId}>
-                                        Cagetory {catId}
+                            this.state.subcategories.map(category =>(
+                                <li key={"subcategory-item-link-" + category.categoryId}>
+                                    <Link className="nav-link" to={"/category/"+category.categoryId}>
+                                        Cagetory {category.name}
                                     </Link>
                                 </li>
                             ))
