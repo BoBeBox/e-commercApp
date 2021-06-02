@@ -1,7 +1,8 @@
 import BasePage, { PageProperties } from '../BasePage/BasePage';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import CategoryModel from '../../../../03-back-end/src/components/category/model';
+import api from '../../api/api';
+import CategoryService from '../../services/CategoryService';
 class CategoryPageProperties extends PageProperties {
     match?: {
         params: {
@@ -12,9 +13,9 @@ class CategoryPageProperties extends PageProperties {
 
 class CategoryPageState {
     title: string = "";
-    isTopLevelCategory: boolean = true;
-    parentCategoryId: number|null = null;
     subcategories: CategoryModel[] = [];
+    showBackButton: boolean = false;
+    parentCategoryId: number|null = null;
 }
 
 export default class CategoryPage extends BasePage<CategoryPageProperties>{
@@ -25,112 +26,122 @@ export default class CategoryPage extends BasePage<CategoryPageProperties>{
 
         this.state = {
             title: "Loading...",
-            isTopLevelCategory: true,
-            parentCategoryId: null,
             subcategories: [],
+            showBackButton: false,
+            parentCategoryId: null,
         };
     }
 
-    private getCategoryIdFromProps(props: CategoryPageProperties): number|null {
-        const paramCid = props.match?.params.cid;
-        return paramCid ? Number(paramCid) : null;
+    private getCategoryId(): number|null {
+        const cid = this.props.match?.params.cid;
+        return cid ? +(cid) : null;
     }
 
-    private CategoryData(){
-        let paramCategoryId = this.getCategoryIdFromProps(this.props);
-        let urlCategoryIdPart = paramCategoryId ?? '';
+    private getCategoryData(){
+        const cId = this.getCategoryId();
+        
+        if (cId === null) {
+            this.apiGetTopLevelCategories();
+        } else {
+            this.apiGetCategory(cId);
+        }
+    }
 
-        axios({
-            method:'get',
-            baseURL:'http://localhost:40080/api',
-            url: '/category/'+ urlCategoryIdPart,
-            timeout: 10000,
-            responseType:'text',
-            headers:{
-                Autorization: 'Fake-TOKEN',
-            },
-            withCredentials: true,
-            maxRedirects: 0,
-        })
-        .then(res => {
-            if(Array.isArray(res.data)){
+    private apiGetTopLevelCategories() {
+        CategoryService.getTopLevelCategories()
+        .then(categories => {
+            if (categories.length === 0) {
                 return this.setState({
+                    title: "No categories found",
+                    subcategories: [],
+                    showBackButton: true,
                     parentCategoryId: null,
-                    isTopLevelCategory: true,
-                    title:"Categories",
-                    subcategories: res.data,
                 });
             }
-            if(typeof res.data !== "object"){
-                throw new Error("Invalid data recieved!");
-            }
             this.setState({
-                parentCategoryId: res.data.parentCategoryId,
-                isTopLevelCategory: false,
-                title: res.data.name,
-                subcategories: res.data.subcategories,
+                title: "All categories",
+                subcategories: categories,
+                showBackButton: false,
+                parentCategoryId: null,
             });
         })
-        .catch(err => {
-            if((err + "").includes("404")){
+    }
+
+    private apiGetCategory(cId: number) {
+        CategoryService.getCategoryById(cId)
+        .then(result => {
+            if (result === null) {
                 return this.setState({
-                    titel: "Category not found",
-                    subcateogires: [],
-                })
+                    title: "Category not found",
+                    subcategories: [],
+                    showBackButton: true,
+                    parentCategoryId: null,
+                });
             }
+
             this.setState({
-                titel:"Unable to load category",
-                subcategories: [],
-            })
-        })
+                title: result.name,
+                subcategories: result.subcategories,
+                parentCategoryId: result.parentCategoryId,
+                showBackButton: true,
+            });
+        });
     }
 
     //poziva se kada se komponenta ugradi u stranicu, kada se prikaze
     componentDidMount(){
-        this.CategoryData();
+        this.getCategoryData();
     }
     //poziva se svaki put put kako dodje do promene stanja ili osobine komponente
     componentDidUpdate(prevProps: CategoryPageProperties, prevState: CategoryPageState) {
-        let odlCategoryId = this.getCategoryIdFromProps(prevProps);
-        let currentCategoryId = this.getCategoryIdFromProps(this.props);
-
-        console.log('updated: ', odlCategoryId, currentCategoryId)
-
-        if(odlCategoryId !== currentCategoryId){
-            this.CategoryData();
+        if (prevProps.match?.params.cid !== this.props.match?.params.cid) {
+            this.getCategoryData();
         }
     }
 
     renderMain(): JSX.Element {
-        let pid = ""+ this.state.parentCategoryId;
 
-        if(pid ==="null"|| pid ==="0") pid = "";
         return (
-            <div className="pageHolder">
+            <>
                 <h1>
                     {
-                    this.state.isTopLevelCategory === false ?
-                    (
-                        <Link className = "text-decoration-name" 
-                        to={"/category/"+pid}>
-                            &laquo; Back |
-                        </Link>
+                        this.state.showBackButton
+                        ? (
+                            <>
+                                <Link to={ "/category/" + (this.state.parentCategoryId ?? '') }>
+                                    &lt; Back
+                                </Link>
+                                |
+                            </>
+                        )
+                        : ""
+                    }
+                    { this.state.title }
+                </h1>
+
+                {
+                    this.state.subcategories.length > 0
+                    ? (
+                        <>
+                            <p>Podkategorije:</p>
+                            <ul>
+                                {
+                                    this.state.subcategories.map(
+                                        catategory => (
+                                            <li key={ "subcategory-link-" + catategory.categoryId }>
+                                                <Link to={ "/category/" + catategory.categoryId }>
+                                                    { catategory.name }
+                                                </Link>
+                                            </li>
+                                        )
+                                    )
+                                }
+                            </ul>
+                        </>
                     )
                     : ""
-                    }
-                </h1>
-                    <ul>
-                        {
-                            this.state.subcategories.map(category =>(
-                                <li key={"subcategory-item-link-" + category.categoryId}>
-                                    <Link className="nav-link" to={"/category/"+category.categoryId}>
-                                        Cagetory {category.name}
-                                    </Link>
-                                </li>
-                            ))
-                        }
-                    </ul>
-            </div>
-        )
+                }
+            </>
+        );
     }
 }

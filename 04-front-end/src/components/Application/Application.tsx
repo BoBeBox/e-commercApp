@@ -28,7 +28,7 @@ export default function Application(){
                                         address="Svetosavska 23, Kikinda"
                                     />
                                 </Route>
-                                <Route exact path="/category/:cid" component={CategoryPage} />
+                                <Route path="/category/:cid?" component={CategoryPage} />
                             </Switch>
                         </Suspense>
                     </div>
