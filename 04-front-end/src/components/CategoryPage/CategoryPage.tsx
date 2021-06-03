@@ -5,6 +5,9 @@ import api from '../../api/api';
 import CategoryService from '../../services/CategoryService';
 import ArticleModel from '../../../../03-back-end/src/components/article/model';
 import ArticleService from '../../services/ArticleService';
+import * as path from 'path';
+import { CardDeck, Col, Card, Row } from 'react-bootstrap';
+import { ApiConfig } from '../../config/api.config';
 class CategoryPageProperties extends PageProperties {
     match?: {
         params: {
@@ -119,6 +122,13 @@ export default class CategoryPage extends BasePage<CategoryPageProperties>{
         }
     }
 
+    private getThumbPath(url: string): string {
+        const directory = path.dirname(url);
+        const extPart = path.extname(url);
+        const namePart = path.basename(url, extPart);
+        return directory + "/" + namePart + "-thumb" + extPart;
+    }
+
     renderMain(): JSX.Element {
 
         return (
@@ -164,21 +174,49 @@ export default class CategoryPage extends BasePage<CategoryPageProperties>{
                 {
                     this.state.articles.length>0
                     ? (
-                        <>
-                            <ul>
-                                {
-                                    this.state.articles.map(
-                                        article => (
-                                            <li key={"article-link" + article.articleId}>
-                                                <Link to={"/article/"+article.articleId}>
-                                                    {article.name}
+                        <CardDeck className="row">
+                            {
+                                this.state.articles.map(
+                                    article => (
+                                        <Col key={"article-cart-holder-" + article.articleId} xs={12} md={4} lg={3} className="mb-3">
+                                            <Card key={"article-cart-" + article.articleId}>
+                                                <Link to={"/article/" + article.articleId}>
+                                                    <Card.Img variant="top" src={ApiConfig.APP_ROOT + this.getThumbPath(article.photos[0]?.imagePath)}/>
                                                 </Link>
-                                            </li>
-                                        )
+                                                <Card.Body>
+                                                    <Card.Title>
+                                                        <Link to={"/article/" + article.articleId}>
+                                                            {article.name}
+                                                        </Link>
+                                                    </Card.Title>
+                                                    <Card.Text as="div">
+                                                        {article.excerpt}
+                                                    </Card.Text>
+                                                    <Card.Text as="div">
+                                                        <Row>
+                                                            <Col md={12} lg={5} xl={4}>
+                                                                <b>Price</b><br />
+                                                                &euro;{article.currentPrice}
+                                                            </Col>
+                                                            <Col md={12} lg={7} xl={8}>
+                                                                <b>Feature</b><br />
+                                                                {
+                                                                    article.features.map(
+                                                                        af=>af.feature.name + ": " + af.value
+                                                                    ).join(", ")
+                                                                }
+                                                            </Col>
+                                                        </Row>
+                                                    </Card.Text>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
                                     )
-                                }
-                            </ul>
-                        </>
+                                )
+                            }
+
+                        </CardDeck> 
+                        
                     ) : ""
                 }
             </>
