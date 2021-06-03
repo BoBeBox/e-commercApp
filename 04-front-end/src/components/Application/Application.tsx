@@ -10,7 +10,7 @@ import UserLogout from '../UserPages/UserLogout';
 import React from 'react';
 import api from "../../api/api";
 import EventRegister from "../../api/EventRegister";
-import ArticlePage from '../ArticlePage/ArticlePage';
+import ArticlePage from '../Article/ArticlePage';
 import UserRegistration from '../UserPages/UserRegistration';
 
 class ApplicationState {
