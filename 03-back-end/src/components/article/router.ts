@@ -36,5 +36,10 @@ export default class ArticleRouter implements IRouter{
             "/api/article/:id/photo/", 
             AuthMiddleware.getVerifier("administrator"),
             articleController.addArticlePhotos.bind(articleController));
+
+            application.get(
+                "/api/category/:id/article",
+                AuthMiddleware.getVerifier("user", "administrator"),
+                articleController.getAllByCategoryId.bind(articleController));
     }
 }

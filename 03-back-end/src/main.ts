@@ -71,6 +71,32 @@ async function main() {
         abortOnLimit: true,
         createParentPath: true,
     }));
+    
+    //ako aplikacija ostane ukljucena duze da se ne izgubi konekcija sa bazom
+    const databaseConnectionMonitor = (databaseConnection: mysql2.Connection) => {
+        databaseConnection.on('error', async error => {
+            if (!error.fatal) {
+                return;
+            }
+            if (error.code !== 'PROTOCOL_CONNECTION_LOST') {
+                throw error;
+            }
+            console.log("Reconnectiong to database...");
+            databaseConnection = await mysql2.createConnection({
+                host: Config.database.host,
+                port: Config.database.port,
+                user: Config.database.user,
+                password: Config.database.password,
+                database: Config.database.database,
+                charset: Config.database.charset,
+                timezone: Config.database.timezone,
+                supportBigNumbers: true,
+            });
+            databaseConnection.connect();
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            databaseConnectionMonitor(databaseConnection);
+        });
+    };
 
     const databaseConnection = await mysql2.createConnection ({
             host: Config.database.host,
@@ -82,6 +108,7 @@ async function main() {
             timezone: Config.database.timezone,
             supportBigNumbers: true,
         });
+    databaseConnectionMonitor(databaseConnection);
 
     databaseConnection.connect();
 

@@ -1,6 +1,6 @@
 import IModel from '../../common/IModel.interface';
 import CategoryModel from '../category/model';
-import { IArticleFeatureValue } from './dto/IAddArticle';
+import FeatureModel from '../feature/model';
 class Price implements IModel{
     priceId: number;
     price: number;
@@ -22,7 +22,10 @@ class ArticleModel implements IModel {
     isPromoted: boolean;
     categoryId: number;
     category?:CategoryModel;
-    features: IArticleFeatureValue[] = [];
+    features: {
+        feature: FeatureModel;
+        value: string;
+    }[] = [];
     currentPrice: number;
     prices: Price[] = [];
     photos: Photo[] = []; 

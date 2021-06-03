@@ -241,6 +241,20 @@ class ArticleController extends BaseController {
 
         res.send(await this.services.articleService.addArticlePhotos(id, uploadedPhotos));
     }
+    public async getAllByCategoryId(req: express.Request, res: express.Response){
+        const id: number = +(req.params?.id);
+
+        if(id <= 0) {
+            res.sendStatus(404);
+            return;
+        }
+
+        const result = await this.services.articleService.getByCategoryId(id, {
+            loadFeature: true,
+            loadPhotos: true,
+        });
+        res.send(result);
+    }
 }
 
 export default ArticleController;
