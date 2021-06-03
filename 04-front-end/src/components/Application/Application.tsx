@@ -12,6 +12,9 @@ import api from "../../api/api";
 import EventRegister from "../../api/EventRegister";
 import ArticlePage from '../Article/ArticlePage';
 import UserRegistration from '../UserPages/UserRegistration';
+import AdministratorLogin from '../AdministratorPages/AdministratorLogin';
+import AdministratorLogout from '../AdministratorPages/AdministratorLogout';
+import Dashboard from "../Dashboard";
 
 class ApplicationState {
     authorizedRole: "user" | "administrator" | "visitor";
@@ -84,9 +87,14 @@ export default class Application extends React.Component{
                                     </Route>
                                     <Route path="/category/:cid?" component={CategoryPage} />
                                     <Route path="/article/:aid" component={ArticlePage} />
+                                    
                                     <Route path="/user/login" component={UserLogin} />
                                     <Route path="/user/logout" component={UserLogout} />
                                     <Route path="/user/register" component={UserRegistration} />
+
+                                    <Route path="/administrator/login" component={AdministratorLogin} />
+                                    <Route path="/administrator/logout" component={AdministratorLogout} />
+                                    <Route path="/dashboard" component={Dashboard} />
                                 </Switch>
                             </Suspense>
                         </div>

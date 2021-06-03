@@ -1,5 +1,7 @@
 import { ApiConfig } from '../config/api.config';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+
+export type ApiRole = 'user' | 'administrator';
 export interface ApiResponse {
     status: 'ok' | 'error' | 'login';
     data: any;
@@ -8,7 +10,7 @@ export interface ApiResponse {
 export default function api(
     method: 'get' | 'post' | 'put' | 'delete',
     path: string,
-    role: 'user' | 'administrator' = 'user',
+    role: ApiRole = 'user',
     body: any | undefined = undefined,
 ){
     return new Promise<ApiResponse|undefined>((resolve) => {
@@ -149,5 +151,15 @@ async function repeatRequest(
         };
         return resolve(response);
     });
+}
 
+export function isRoleLoggedInAs(role: ApiRole): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+        api("get", "/auth/" + role + "/ok", role)
+        .then(res => {
+            if (res?.data === "OK") resolve(true);
+            else resolve(false);
+        })
+        .catch(() => { resolve(false); });
+    });
 }
