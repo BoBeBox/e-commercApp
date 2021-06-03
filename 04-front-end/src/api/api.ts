@@ -110,7 +110,7 @@ async function refreshToken(role: 'user' | 'administrator'): Promise<string|null
         baseURL: ApiConfig.API_URL,
         data: JSON.stringify(data),
         headers: {
-            'Contenct-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
     };
     const rtr: { data: { token: string | undefined } } = await axios(refreshTokenRequestData);

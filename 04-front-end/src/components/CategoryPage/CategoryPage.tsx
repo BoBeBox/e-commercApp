@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import CategoryModel from '../../../../03-back-end/src/components/category/model';
 import api from '../../api/api';
 import CategoryService from '../../services/CategoryService';
+import ArticleModel from '../../../../03-back-end/src/components/article/model';
+import ArticleService from '../../services/ArticleService';
 class CategoryPageProperties extends PageProperties {
     match?: {
         params: {
@@ -16,6 +18,7 @@ class CategoryPageState {
     subcategories: CategoryModel[] = [];
     showBackButton: boolean = false;
     parentCategoryId: number|null = null;
+    articles: ArticleModel[] = [];
 }
 
 export default class CategoryPage extends BasePage<CategoryPageProperties>{
@@ -29,6 +32,7 @@ export default class CategoryPage extends BasePage<CategoryPageProperties>{
             subcategories: [],
             showBackButton: false,
             parentCategoryId: null,
+            articles: [],
         };
     }
 
@@ -56,6 +60,7 @@ export default class CategoryPage extends BasePage<CategoryPageProperties>{
                     subcategories: [],
                     showBackButton: true,
                     parentCategoryId: null,
+                    artocles: [],
                 });
             }
             this.setState({
@@ -63,6 +68,7 @@ export default class CategoryPage extends BasePage<CategoryPageProperties>{
                 subcategories: categories,
                 showBackButton: false,
                 parentCategoryId: null,
+                articles: [],
             });
         })
     }
@@ -85,7 +91,21 @@ export default class CategoryPage extends BasePage<CategoryPageProperties>{
                 parentCategoryId: result.parentCategoryId,
                 showBackButton: true,
             });
+            this.apiGetArticlesByCategoryId(cId);
         });
+    }
+    private apiGetArticlesByCategoryId(cId: number){
+        ArticleService.getArticlesByCategoryId(cId)
+        .then(res => {
+            if(!Array.isArray(res)) {
+                return this.setState({
+                    articles: [],
+                });
+            }
+            this.setState({
+                articles: res as ArticleModel[],
+            })
+        })
     }
 
     //poziva se kada se komponenta ugradi u stranicu, kada se prikaze
@@ -140,6 +160,26 @@ export default class CategoryPage extends BasePage<CategoryPageProperties>{
                         </>
                     )
                     : ""
+                }
+                {
+                    this.state.articles.length>0
+                    ? (
+                        <>
+                            <ul>
+                                {
+                                    this.state.articles.map(
+                                        article => (
+                                            <li key={"article-link" + article.articleId}>
+                                                <Link to={"/article/"+article.articleId}>
+                                                    {article.name}
+                                                </Link>
+                                            </li>
+                                        )
+                                    )
+                                }
+                            </ul>
+                        </>
+                    ) : ""
                 }
             </>
         );
