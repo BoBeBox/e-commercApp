@@ -5,11 +5,13 @@ import TopMenu from "../TopMenu/TopMenu";
 import ContactPage from "../ContactPage/ContactPage";
 import HomePage from "../HomePage/HomePage";
 import CategoryPage from '../CategoryPage/CategoryPage';
-import UserLogin from '../UserLogin/UserLogin';
-import UserLogout from '../UserLogout/UserLogout';
+import UserLogin from '../UserPages/UserLogin';
+import UserLogout from '../UserPages/UserLogout';
 import React from 'react';
 import api from "../../api/api";
 import EventRegister from "../../api/EventRegister";
+import ArticlePage from '../ArticlePage/ArticlePage';
+import UserRegistration from '../UserPages/UserRegistration';
 
 class ApplicationState {
     authorizedRole: "user" | "administrator" | "visitor";
@@ -81,8 +83,10 @@ export default class Application extends React.Component{
                                         />
                                     </Route>
                                     <Route path="/category/:cid?" component={CategoryPage} />
+                                    <Route path="/article/:aid" component={ArticlePage} />
                                     <Route path="/user/login" component={UserLogin} />
                                     <Route path="/user/logout" component={UserLogout} />
+                                    <Route path="/user/register" component={UserRegistration} />
                                 </Switch>
                             </Suspense>
                         </div>
