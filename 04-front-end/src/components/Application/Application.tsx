@@ -18,6 +18,7 @@ import CategoryDashboardList from '../AdministratorPages/Dashboard/Category/Cate
 import CategoryDashboardAdd from '../AdministratorPages/Dashboard/Category/CategoryAdd';
 import CategoryDashboardEdit from '../AdministratorPages/Dashboard/Category/CategoryEdit';
 import FeatureDashboardList from "../AdministratorPages/Dashboard/Feature/FeatureList";
+import CartPage from "../Cart/CartPage";
 
 class ApplicationState {
     authorizedRole: "user" | "administrator" | "visitor";
@@ -94,6 +95,8 @@ export default class Application extends React.Component{
                                     <Route path="/user/login" component={UserLogin} />
                                     <Route path="/user/logout" component={UserLogout} />
                                     <Route path="/user/register" component={UserRegistration} />
+                                    
+                                    <Route exact path="/cart" component={CartPage} />
 
                                     <Route path="/administrator/login" component={AdministratorLogin} />
                                     <Route path="/administrator/logout" component={AdministratorLogout} />
