@@ -1,0 +1,4664 @@
+{
+	"info": {
+		"_postman_id": "97a7e8f2-d627-4e27-9383-4ca17e0d0655",
+		"name": "Projekat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "GET category all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/categor",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"categor"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET category all - good",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/category",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "401"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"191-uP7GeUaFrBUd3R51ZSlb81PiePI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:03:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"parentCategoryId\": 0,\n        \"parentCategory\": null,\n        \"subcategories\": [],\n        \"categoryId\": 1,\n        \"name\": \"Prva\",\n        \"imagePath\": \"/static/image/1.png\"\n    },\n    {\n        \"parentCategoryId\": 0,\n        \"parentCategory\": null,\n        \"subcategories\": [],\n        \"categoryId\": 3,\n        \"name\": \"Treca\",\n        \"imagePath\": \"/static/image/1.jpg\"\n    },\n    {\n        \"parentCategoryId\": 0,\n        \"parentCategory\": null,\n        \"subcategories\": [],\n        \"categoryId\": 4,\n        \"name\": \"veliki tepih\",\n        \"imagePath\": \"/static/categories/tepih1.jpg\"\n    }\n]"
+						},
+						{
+							"name": "GET category all - error 404",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/categor",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"categor"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'none'"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "150"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:03:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error</title>\n    </head>\n    <body>\n        <pre>Cannot GET /api/categor</pre>\n    </body>\n</html>"
+						}
+					]
+				},
+				{
+					"name": "GET category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/category/22",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"category",
+								"22"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET category by id - 3 good",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/category/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "127"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7f-rACqfKwZLd1AQgln9yKdf6mW4Ac\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:05:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"parentCategoryId\": 0,\n    \"parentCategory\": null,\n    \"subcategories\": [],\n    \"categoryId\": 3,\n    \"name\": \"Treca\",\n    \"imagePath\": \"/static/image/1.jpg\"\n}"
+						},
+						{
+							"name": "GET category by id - 22 error 404",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/category/22",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"22"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:05:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "POST new category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJib3dhbmRlcmx1c3Q0QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjIyNDkyODkwLCJleHAiOjE2MjI1NzkyOTAsImlzcyI6IlByYWt0aWt1bSBXZWIgQXBwbGljYXRpb24ifQ.K_gIdoVBMySd9cRufpPN4dUziyF76JfHOY-ysTL7VV_puC09ZH9yHYCx6e4J9d9BRtNwggc_KJPeeHWxm4PCEfBB5vQHgtI4BVCWstrtRTzdPbhajuMQVnV3cDw2VPgjUqHJnyIZlfzMHbMt3yOdeuoNMFYj-7MqD7Dkt6zcN2RKXah9gVo1DvGSfVi6zAFcr-uviUXIrmP3C7o9QCLWgoP9o-M_h8Gd6S4WplrAVR1buPdHh4DsMbRdko4q_NJQgHIjOlS1kZ4ZR5PcwRQkYAEiLX-Syvois82h_aC6L7ZNQ9Ori6f0oKmb30Guq8RJ4mzLtmKuunMVrnG86_95lg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"deciji tepih\",\r\n    \"imagePath\": \"/static/category/images/slika.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:40080/api/category",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST new category - posted tepisi ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"tepisi\",\r\n    \"imagePath\": \"/static/category/images/slika.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/category",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "142"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8e-w/klh0tCxlm3akAAsiLf1fNxYaM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:09:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"parentCategoryId\": 0,\n    \"parentCategory\": null,\n    \"subcategories\": [],\n    \"categoryId\": 5,\n    \"name\": \"tepisi\",\n    \"imagePath\": \"/static/category/images/slika.jpg\"\n}"
+						},
+						{
+							"name": "POST new category - post error 400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\":\"tepisi\",\r\n    \"immagePath\": \"/static/category/images/slika.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/category",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "177"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b1-Qvg+i4tB1MdLPlwh97HMZzwz5j8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:12:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"additionalProperties\",\n        \"dataPath\": \"\",\n        \"schemaPath\": \"#/additionalProperties\",\n        \"params\": {\n            \"additionalProperty\": \"Name\"\n        },\n        \"message\": \"should NOT have additional properties\"\n    }\n]"
+						},
+						{
+							"name": "POST new category - access denied to user role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"deciji tepih\",\r\n    \"imagePath\": \"/static/category/images/slika.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/category",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 20:29:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						}
+					]
+				},
+				{
+					"name": "PUT category - edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "PUT category - edit 200 OK, but must be unique key",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Prva\",\r\n    \"imagePath\": \"/static/categories/tepih.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/category/5",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"50-Ch1iZGzO5ofk6ghi90/3PnoYcZU\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:19:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 1062,\n    \"message\": \"Duplicate entry 'Prva' for key 'uq_category_name'\"\n}"
+						},
+						{
+							"name": "PUT category - edit 200 OK edited",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"drugi tepih\",\r\n    \"imagePath\": \"/static/categories/tepih.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/category/5",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "142"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8e-D0a4bd1ueZimYUQrH5EK4mMi3wo\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:20:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"parentCategoryId\": 0,\n    \"parentCategory\": null,\n    \"subcategories\": [],\n    \"categoryId\": 5,\n    \"name\": \"drugi tepih\",\n    \"imagePath\": \"/static/categories/tepih.jpg\"\n}"
+						},
+						{
+							"name": "PUT category - edit 200 OK but must be unique image path",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Prva\",\r\n    \"imagePath\": \"/static/categories/tepih.jpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/category/1",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6e-63LLRgmFi0Q0NOKn2J6NYpj/vmM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:22:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 1062,\n    \"message\": \"Duplicate entry '/static/categories/tepih.jpg' for key 'uq_category_image_path'\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "DELETE category - deleted - but found error in code, interesting way to find the mistake (undefined rows)",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/category/5",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-cmQGpLLauyHH75jKc/7xFwUjHLk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:23:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted undefined rows\"\n}"
+						},
+						{
+							"name": "DELETE category - row already deleted 200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/category/4",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-FMZD+1x1ho/rDeJ9JZbtX7vN8Vs\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:26:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 0 rows\"\n}"
+						},
+						{
+							"name": "DELETE category - row deleted 200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/category/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-WU2NygMrAGNavHcyDnzFbfGgfn8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:27:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 1 rows\"\n}"
+						},
+						{
+							"name": "DELETE category - No rows deleted on random id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/category/33",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"33"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-FMZD+1x1ho/rDeJ9JZbtX7vN8Vs\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 May 2021 18:27:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 0 rows\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJCb2phbmEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTYyMjU0NDk1OCwiZXhwIjoxNjIyNjMxMzU4LCJpc3MiOiJQcmFrdGlrdW0gV2ViIEFwcGxpY2F0aW9uIn0.HOuq-TczZ3svqeuKrVKIsBsoQfFrYcYKCZXrGnF_JLlSIX33qgOzk1aD2cofHQldNGukrIY6CY-vSdroiXP6wt3d8CKlS5vkceua4yXi-AWYCGCJEXPpbDX9xn-JFhMxUZXXecZCyIY-oa67mX9AcTEnw5OSgighvoemd62eupRCayyplVAZdLAzqrxcc4SgolA6iGqcMvgj2V1q9-3BM2ofsest5zYiFxbhPRW382E0eOyUVYGeQQfzRK13jHEYlpStE2pmqgawm0dKiB6CNrvamb-LaHAsfP5KjPaANfNKPOT-h6MuSF3v3V46XPuquCSAdsmQgDRDkTruB4vfxQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Feature",
+			"item": [
+				{
+					"name": "GET feature",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "GET feature - cid 1 feature",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/category/1/feature",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"1",
+										"feature"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40-ZH31/yW251J0sNqLv4uua5wD5M4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 12:44:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoryId\": 1,\n        \"category\": null,\n        \"featureId\": 1,\n        \"name\": \"vuneni\"\n    }\n]"
+						},
+						{
+							"name": "GET feature - no such feature",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/category/11/feature",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"category",
+										"11",
+										"feature"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 12:46:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "POST new feature",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "POST new feature - added new feature",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"veliki\",\r\n    \"categoryId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/feature",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"feature"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-LFAr92AobebMmzp+0M4lk70AxBk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 12:51:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 2,\n    \"category\": null,\n    \"featureId\": 3,\n    \"name\": \"veliki\"\n}"
+						},
+						{
+							"name": "POST new feature - trying to add the same feature twice",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"veliki\",\r\n    \"categoryId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/feature",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"feature"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f-EV7PgJnII7zlzK7WWp2PLxbRzSc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 12:52:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 1062,\n    \"message\": \"Duplicate entry 'veliki-2' for key 'uq_feature_name_category_id'\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT edit feature",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/feature/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"feature",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT edit feature - changed feature id 3",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"mali\",\r\n    \"categoryId\":2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/feature/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"feature",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-8h5D96RQ2XVOktw8MNXB/swrqjo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 12:54:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 2,\n    \"category\": null,\n    \"featureId\": 3,\n    \"name\": \"mali\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE feature",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "DELETE feature - deleted id 3",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/feature/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"feature",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-WU2NygMrAGNavHcyDnzFbfGgfn8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 12:57:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 1 rows\"\n}"
+						},
+						{
+							"name": "DELETE feature - nothing to delete there",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/feature/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"feature",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-FMZD+1x1ho/rDeJ9JZbtX7vN8Vs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 12:57:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 0 rows\"\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Article",
+			"item": [
+				{
+					"name": "GET article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "GET article id 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/article/1",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "910"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38e-DJoLLN/lHbCaJlRFN5YMh/NS8lQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 May 2021 18:15:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"features\": [\n        {\n            \"feature\": {\n                \"categoryId\": 1,\n                \"category\": null,\n                \"featureId\": 1,\n                \"name\": \"vuneni\"\n            },\n            \"value\": \"4\"\n        }\n    ],\n    \"prices\": [\n        {\n            \"priceId\": 1,\n            \"price\": \"10.00\",\n            \"createdAt\": \"2021-05-30T14:53:48.000Z\"\n        }\n    ],\n    \"photos\": [\n        {\n            \"photoId\": 1,\n            \"imagePath\": \"/static/pic1.png\"\n        }\n    ],\n    \"articleId\": 1,\n    \"name\": \"Article\",\n    \"excerpt\": \"2\",\n    \"description\": \"lepo izgleda\",\n    \"status\": \"available\",\n    \"isPromoted\": 1,\n    \"createdAt\": \"2021-05-30T14:53:18.000Z\",\n    \"categoryId\": 1,\n    \"currentPrice\": \"10.00\",\n    \"category\": {\n        \"parentCategoryId\": 0,\n        \"parentCategory\": null,\n        \"subcategories\": [\n            {\n                \"parentCategoryId\": 1,\n                \"parentCategory\": null,\n                \"subcategories\": [],\n                \"features\": [\n                    {\n                        \"categoryId\": 2,\n                        \"category\": null,\n                        \"featureId\": 2,\n                        \"name\": \"poliester\"\n                    },\n                    {\n                        \"categoryId\": 1,\n                        \"category\": null,\n                        \"featureId\": 1,\n                        \"name\": \"vuneni\"\n                    }\n                ],\n                \"categoryId\": 2,\n                \"name\": \"Druga(1)\",\n                \"imagePath\": \"/static/image/2.png\"\n            }\n        ],\n        \"features\": [\n            {\n                \"categoryId\": 1,\n                \"category\": null,\n                \"featureId\": 1,\n                \"name\": \"vuneni\"\n            }\n        ],\n        \"categoryId\": 1,\n        \"name\": \"Prva\",\n        \"imagePath\": \"/static/image/1.png\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "POST article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "POST article - error in json",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{\n\t\"name\":\"proba artikla\",\n\t\"excerpt\":\"neki opis\",\n\t\"description\": \"opis za prikazivanje, bla bla bla\",\n\t\"status\":\"available\",\n\t\"isPromoted\": true,\n\t\"price\": 14.44,\n\t\"categoryId\": 1,\n\t\"feature\":[{\n\t\t\"featureId\":1,\n\t\t\"valuse\":\"vrednost\"\n\t}]\n}",
+											"type": "text"
+										},
+										{
+											"key": "photo\n",
+											"type": "file",
+											"src": "/G:/Uni/E-poslovanje [maj-jun]/Ispit/projekat/03-back-end/static/1.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:40080/api/article",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "180"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b4-9AZbcYBP3wSeN+WQOdqe/dAyFuo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 May 2021 18:23:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"additionalProperties\",\n        \"dataPath\": \"\",\n        \"schemaPath\": \"#/additionalProperties\",\n        \"params\": {\n            \"additionalProperty\": \"feature\"\n        },\n        \"message\": \"should NOT have additional properties\"\n    }\n]"
+						},
+						{
+							"name": "POST article added",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{\n\t\"name\":\"proba artikla\",\n\t\"excerpt\":\"neki opis\",\n\t\"description\": \"opis za prikazivanje, bla bla bla\",\n\t\"status\":\"available\",\n\t\"isPromoted\": true,\n\t\"price\": 14.44,\n\t\"categoryId\": 1,\n\t\"features\":[{\n\t\t\"featureId\":1,\n\t\t\"value\":\"vrednost\"\n\t}]\n}",
+											"type": "text"
+										},
+										{
+											"key": "photo\n",
+											"type": "file",
+											"src": "/G:/Uni/E-poslovanje [maj-jun]/Ispit/projekat/03-back-end/static/1.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:40080/api/article",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1001"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e9-fO6OJ8GlX16SAhx4eh3NbwHW2Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 May 2021 18:24:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"features\": [\n        {\n            \"feature\": {\n                \"categoryId\": 1,\n                \"category\": null,\n                \"featureId\": 1,\n                \"name\": \"vuneni\"\n            },\n            \"value\": \"vrednost\"\n        }\n    ],\n    \"prices\": [\n        {\n            \"priceId\": 2,\n            \"price\": \"14.44\",\n            \"createdAt\": \"2021-05-30T19:24:53.000Z\"\n        }\n    ],\n    \"photos\": [\n        {\n            \"photoId\": 2,\n            \"imagePath\": \"static/uploads/dbcf7d15-75d9-4e02-9db8-3c15f5f9da42-2021/05/1.png\"\n        }\n    ],\n    \"articleId\": 2,\n    \"name\": \"proba artikla\",\n    \"excerpt\": \"neki opis\",\n    \"description\": \"opis za prikazivanje, bla bla bla\",\n    \"status\": \"available\",\n    \"isPromoted\": 1,\n    \"createdAt\": \"2021-05-30T19:24:53.000Z\",\n    \"categoryId\": 1,\n    \"currentPrice\": \"14.44\",\n    \"category\": {\n        \"parentCategoryId\": 0,\n        \"parentCategory\": null,\n        \"subcategories\": [\n            {\n                \"parentCategoryId\": 1,\n                \"parentCategory\": null,\n                \"subcategories\": [],\n                \"features\": [\n                    {\n                        \"categoryId\": 2,\n                        \"category\": null,\n                        \"featureId\": 2,\n                        \"name\": \"poliester\"\n                    },\n                    {\n                        \"categoryId\": 1,\n                        \"category\": null,\n                        \"featureId\": 1,\n                        \"name\": \"vuneni\"\n                    }\n                ],\n                \"categoryId\": 2,\n                \"name\": \"Druga(1)\",\n                \"imagePath\": \"/static/image/2.png\"\n            }\n        ],\n        \"features\": [\n            {\n                \"categoryId\": 1,\n                \"category\": null,\n                \"featureId\": 1,\n                \"name\": \"vuneni\"\n            }\n        ],\n        \"categoryId\": 1,\n        \"name\": \"Prva\",\n        \"imagePath\": \"/static/image/1.png\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "EDIT article",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"samo ti\",\r\n    \"excerpt\": \"neki opis\",\r\n    \"description\": \"opis za prikazivanje\",\r\n    \"status\": \"available\",\r\n    \"isPromoted\": true,\r\n    \"price\": 145.44,\r\n    \"features\": [\r\n            {\r\n                \"featureId\": 1,\r\n                \"value\": \"vuneni\"\r\n            }\r\n        ]\r\n}"
+						},
+						"url": {
+							"raw": "localhost:40080/api/article/2",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"article",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "EDIT article - additional property",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"proba artikla\",\r\n    \"excerpt\": \"neki opis\",\r\n    \"description\": \"opis za prikazivanje\",\r\n    \"status\": \"available\",\r\n    \"isPromoted\": true,\r\n    \"currentPrice\": \"14.44\",\r\n    \"features\": [\r\n            {\r\n                \"featureId\": 1,\r\n                \"name\": \"vuneni\"\r\n            }\r\n        ]\r\n}"
+								},
+								"url": {
+									"raw": "localhost:40080/api/article/2",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article",
+										"2"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "185"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b9-QZOPBmv1R+w1oyJZdYCgExI/C2c\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 08:31:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"additionalProperties\",\n        \"dataPath\": \"\",\n        \"schemaPath\": \"#/additionalProperties\",\n        \"params\": {\n            \"additionalProperty\": \"currentPrice\"\n        },\n        \"message\": \"should NOT have additional properties\"\n    }\n]"
+						},
+						{
+							"name": "EDIT article - wrong type",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"proba artikla\",\r\n    \"excerpt\": \"neki opis\",\r\n    \"description\": \"opis za prikazivanje\",\r\n    \"status\": \"available\",\r\n    \"isPromoted\": true,\r\n    \"price\": \"144.44\",\r\n    \"features\": [\r\n            {\r\n                \"featureId\": 1,\r\n                \"name\": \"vuneni\"\r\n            }\r\n        ]\r\n}"
+								},
+								"url": {
+									"raw": "localhost:40080/api/article/2",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article",
+										"2"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "135"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"87-DLbNSQEhrRvp5Rvn+DQpWWQDLwQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 08:33:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"type\",\n        \"dataPath\": \".price\",\n        \"schemaPath\": \"#/properties/price/type\",\n        \"params\": {\n            \"type\": \"number\"\n        },\n        \"message\": \"should be number\"\n    }\n]"
+						},
+						{
+							"name": "EDIT article - edited",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"proba artikla\",\r\n    \"excerpt\": \"neki opis\",\r\n    \"description\": \"opis za prikazivanje\",\r\n    \"status\": \"available\",\r\n    \"isPromoted\": true,\r\n    \"price\": 144.44,\r\n    \"features\": [\r\n            {\r\n                \"featureId\": 1,\r\n                \"value\": \"vuneni\"\r\n            }\r\n        ]\r\n}"
+								},
+								"url": {
+									"raw": "localhost:40080/api/article/2",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1057"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"421-JwH1CxYXrgVBBCqKo6LUFW6aowk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 08:50:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"features\": [\n        {\n            \"feature\": {\n                \"categoryId\": 1,\n                \"category\": null,\n                \"featureId\": 1,\n                \"name\": \"vuneni\"\n            },\n            \"value\": \"vuneni\"\n        }\n    ],\n    \"prices\": [\n        {\n            \"priceId\": 2,\n            \"price\": \"14.44\",\n            \"createdAt\": \"2021-05-30T19:24:53.000Z\"\n        },\n        {\n            \"priceId\": 5,\n            \"price\": \"144.44\",\n            \"createdAt\": \"2021-05-31T09:50:22.000Z\"\n        }\n    ],\n    \"photos\": [\n        {\n            \"photoId\": 2,\n            \"imagePath\": \"static/uploads/dbcf7d15-75d9-4e02-9db8-3c15f5f9da42-2021/05/1.png\"\n        }\n    ],\n    \"articleId\": 2,\n    \"name\": \"proba artikla\",\n    \"excerpt\": \"neki opis\",\n    \"description\": \"opis za prikazivanje\",\n    \"status\": \"available\",\n    \"isPromoted\": 1,\n    \"createdAt\": \"2021-05-30T19:24:53.000Z\",\n    \"categoryId\": 1,\n    \"currentPrice\": \"144.44\",\n    \"category\": {\n        \"parentCategoryId\": 0,\n        \"parentCategory\": null,\n        \"subcategories\": [\n            {\n                \"parentCategoryId\": 1,\n                \"parentCategory\": null,\n                \"subcategories\": [],\n                \"features\": [\n                    {\n                        \"categoryId\": 2,\n                        \"category\": null,\n                        \"featureId\": 2,\n                        \"name\": \"poliester\"\n                    },\n                    {\n                        \"categoryId\": 1,\n                        \"category\": null,\n                        \"featureId\": 1,\n                        \"name\": \"vuneni\"\n                    }\n                ],\n                \"categoryId\": 2,\n                \"name\": \"Druga(1)\",\n                \"imagePath\": \"/static/image/2.png\"\n            }\n        ],\n        \"features\": [\n            {\n                \"categoryId\": 1,\n                \"category\": null,\n                \"featureId\": 1,\n                \"name\": \"vuneni\"\n            }\n        ],\n        \"categoryId\": 1,\n        \"name\": \"Prva\",\n        \"imagePath\": \"/static/image/1.png\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE article",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/article/3",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"article",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE article - success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/article/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-qHDY0FrKK9Jg98ULiT8UE0zcU74\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 10:08:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Article has been deleted.\"\n}"
+						},
+						{
+							"name": "DELETE article - deleting article id that doesn't exist",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/article/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article",
+										"3"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 10:08:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "DELETE article photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/article/4/photo/3",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"article",
+								"4",
+								"photo",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE article photo - cannot delete only photo",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/article/4/photo/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article",
+										"4",
+										"photo",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "98"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"62-0AN5zbaLlH8zzWlDHZzSMk5zGf0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 10:19:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": -1023,\n    \"message\": \"Cannot delete this photo. An article must have one photo at least.\"\n}"
+						},
+						{
+							"name": "DELETE article photo - success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/article/4/photo/4",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article",
+										"4",
+										"photo",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-PoRsrKz3FZUxPsZtxpZvE6IB4l0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 10:20:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Photo has been deleted\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST add new photo article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "1.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:40080/api/article/4/photo/",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"article",
+								"4",
+								"photo",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST add new photo article - added",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "1.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:40080/api/article/4/photo/",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"article",
+										"4",
+										"photo",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "504"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f8-5xTB3qeFnNkma+K9FcQNwT+tIXE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 10:36:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"features\": [],\n    \"prices\": [],\n    \"photos\": [\n        {\n            \"photoId\": 3,\n            \"imagePath\": \"static/uploads/cb0ee761-4b33-4b92-be31-288a8b8e6769-2021/05/cb0ee761-4b33-4b92-be31-288a8b8e6769-1.png\"\n        },\n        {\n            \"photoId\": 5,\n            \"imagePath\": \"static/uploads/eba12948-7c5c-4ef7-bb81-e2b585741794-2021/05/eba12948-7c5c-4ef7-bb81-e2b585741794-1.png\"\n        }\n    ],\n    \"articleId\": 4,\n    \"name\": \"samo ti\",\n    \"excerpt\": \"neki opis\",\n    \"description\": \"opis za prikazivanje\",\n    \"status\": \"available\",\n    \"isPromoted\": 1,\n    \"createdAt\": \"2021-05-30T20:21:06.000Z\",\n    \"categoryId\": 1,\n    \"currentPrice\": \"142.44\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Administrator",
+			"item": [
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/administrator",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"administrator"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all - got all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/administrator",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "120"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"78-guWP1kXd9bkgzaE++pzjD4tNFg0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 13:33:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"administratorId\": 1,\n        \"username\": \"BeBox\",\n        \"passwordHash\": \"$2b$11$J1pRlWYf4PTlNXEVA/bPG.1kjkw/VIkPcC8.iDLPZXhSLoAT0i9Oe\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/administrator/1",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET by id - got by id 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/administrator/1",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"76-49LCnR6uInpOWRU314Mi+1G+zGI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 13:34:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"BeBox\",\n    \"passwordHash\": \"$2b$11$J1pRlWYf4PTlNXEVA/bPG.1kjkw/VIkPcC8.iDLPZXhSLoAT0i9Oe\"\n}"
+						},
+						{
+							"name": "GET by id - no admin with id 3",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/administrator/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"administrator",
+										"3"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 13:34:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "POST add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"BeBox1\",\r\n    \"password\": \"nekabudesifra\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:40080/api/administrator",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"administrator"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST add - added administrator",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"BeBox\",\r\n    \"password\": \"nekabudesifra3\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost:40080/api/administrator",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"76-49LCnR6uInpOWRU314Mi+1G+zGI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 12:59:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"BeBox\",\n    \"passwordHash\": \"$2b$11$J1pRlWYf4PTlNXEVA/bPG.1kjkw/VIkPcC8.iDLPZXhSLoAT0i9Oe\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"nekanovasifra\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:40080/api/administrator/1",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT admin - password changed",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\":\"nekanovasifra\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost:40080/api/administrator/1",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"76-7/MggvkBMVsNIWwzLIm2fTzG5ZI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 13:36:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"BeBox\",\n    \"passwordHash\": \"$2b$11$McIQqKKSFvGamtneQK86oO8C1kIxILsbT6MRdTMr6UNXuc1cc5RPu\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE admin id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/administrator/2",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"administrator",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE admin id - deleted admin id 2",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/administrator/2",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"administrator",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-G1oQQOo+xNvExE6TuF5R6FbzF/Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 13:53:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 1 rows.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/user",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all - got users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/user",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "216"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d8-PVaor5Kwe8q6CI8S/bV9IbwvkLk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 14:40:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"userId\": 1,\n        \"username\": \"botaeyeon4@gmail.com\",\n        \"passwordHash\": \"$2b$11$XKXV2jQPtEodn.3DBPFKXucMt8ktcIbVv0yuTx..1S8wiHbOgjW2m\",\n        \"forename\": \"Taeyeon\",\n        \"surname\": \"Bo\",\n        \"phoneNumber\": \"0611231231\",\n        \"postalAddress\": \"Tokyo 94\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/user/3",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET user id - gut user by id 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/user/1",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "214"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d6-KDheA3mbDKpTRLdTCGB18VwE2do\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 14:41:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 1,\n    \"username\": \"botaeyeon4@gmail.com\",\n    \"passwordHash\": \"$2b$11$XKXV2jQPtEodn.3DBPFKXucMt8ktcIbVv0yuTx..1S8wiHbOgjW2m\",\n    \"forename\": \"Taeyeon\",\n    \"surname\": \"Bo\",\n    \"phoneNumber\": \"0611231231\",\n    \"postalAddress\": \"Tokyo 94\"\n}"
+						},
+						{
+							"name": "GET user id -  no user with id 3",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/user/3",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user",
+										"3"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 14:41:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "POST add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"email\":\"botaeyeon4@gmail.com\",\r\n        \"password\":\"botaeyeon4\",\r\n        \"forename\":\"Taeyeon\",\r\n        \"surname\":\"Bo\",\r\n        \"phoneNumber\":\"0611231231\",\r\n        \"postalAddress\":\"Tokyo 94\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:40080/api/user",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST add - added user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"email\":\"botaeyeon4@gmail.com\",\r\n        \"password\":\"botaeyeon4\",\r\n        \"forename\":\"Taeyeon\",\r\n        \"surname\":\"Bo\",\r\n        \"phoneNumber\":\"0611231231\",\r\n        \"postalAddress\":\"Tokyo 94\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost:40080/api/user",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "214"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d6-KDheA3mbDKpTRLdTCGB18VwE2do\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 14:40:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 1,\n    \"username\": \"botaeyeon4@gmail.com\",\n    \"passwordHash\": \"$2b$11$XKXV2jQPtEodn.3DBPFKXucMt8ktcIbVv0yuTx..1S8wiHbOgjW2m\",\n    \"forename\": \"Taeyeon\",\n    \"surname\": \"Bo\",\n    \"phoneNumber\": \"0611231231\",\n    \"postalAddress\": \"Tokyo 94\"\n}"
+						},
+						{
+							"name": "POST add - pasword too short",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"email\":\"bobo4@gmail.com\",\r\n        \"password\":\"Bobo\",\r\n        \"forename\":\"Bo\",\r\n        \"surname\":\"Bo\",\r\n        \"phoneNumber\":\"0230482482\",\r\n        \"postalAddress\":\"Seoul 18\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost:40080/api/user",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "168"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a8-lzyKdzChyVp2J9jCckmtF1ydqi4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 14:46:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"minLength\",\n        \"dataPath\": \".password\",\n        \"schemaPath\": \"#/properties/password/minLength\",\n        \"params\": {\n            \"limit\": 5\n        },\n        \"message\": \"should NOT be shorter than 5 characters\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "POST reguster",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"email\":\"bowanderlust4@gmail.com\",\r\n        \"password\":\"adsads\",\r\n        \"forename\":\"Bo\",\r\n        \"surname\":\"Bo\",\r\n        \"phoneNumber\":\"0230482482\",\r\n        \"postalAddress\":\"Seoul 18\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:40080/api/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST reguster - user registered",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"email\":\"bowanderlust4@gmail.com\",\r\n        \"password\":\"Lion.King4\",\r\n        \"forename\":\"Bo\",\r\n        \"surname\":\"Bo\",\r\n        \"phoneNumber\":\"0230482482\",\r\n        \"postalAddress\":\"Seoul 18\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/user/register",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "209"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d1-O2ZEXYRjDj5UhPFBefiECcR7/NM\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 16:07:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 5,\n    \"email\": \"bowanderlust4@gmail.com\",\n    \"passwordHash\": \"$2b$11$xDGh3jLMCROQ8UhYYHugaOEvyK26buRC.hwD9qu18oc/Oz1o1i9wK\",\n    \"forename\": \"Bo\",\n    \"surname\": \"Bo\",\n    \"phoneNumber\": \"0230482482\",\n    \"postalAddress\": \"Seoul 18\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "PUT edit - user edited",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"password\":\"botaeyeon4\",\r\n        \"forename\":\"Taeyeon\",\r\n        \"surname\":\"Bo\",\r\n        \"phoneNumber\":\"062468468\",\r\n        \"postalAddress\":\"Tokyo 94\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost:40080/api/user/1",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "213"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d5-u9fdfctJi+//Y2YO5KVtJXWqESs\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 14:43:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 1,\n    \"username\": \"botaeyeon4@gmail.com\",\n    \"passwordHash\": \"$2b$11$zg8gcGz/yrB30ICUjxHIROsVH5wpBbc7ARl1Ke83c6ShhmyHMeooO\",\n    \"forename\": \"Taeyeon\",\n    \"surname\": \"Bo\",\n    \"phoneNumber\": \"062468468\",\n    \"postalAddress\": \"Tokyo 94\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "DELETE user - user deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/user/2",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-G1oQQOo+xNvExE6TuF5R6FbzF/Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 14:47:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 1 rows.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "POST administrator log in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Bojana\",\r\n    \"password\": \"Bojana\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:40080/api/auth/administrator/login",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"auth",
+								"administrator",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST auth - generated token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"BeBox1\",\r\n    \"password\": \"nekabudesifra\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/auth/administrator/login",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"auth",
+										"administrator",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1112"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"458-Mg0/S7XBczDvWikradaFV9zTyl4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 20:23:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRlbnRpdHkiOiJCZUJveDEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTYyMjQ5MjU4OCwiZXhwIjoxNjIyNTc4OTg4LCJpc3MiOiJQcmFrdGlrdW0gV2ViIEFwcGxpY2F0aW9uIn0.HKmuGsEcDxlqk3H8lIRrUwXWpM4gYUxK4EbKpwvY1tZLuk-c6A1pay0W2JurF-728euxP_k884KUCGt6CrXQaBgxpTc4N5uWANrC36E7ax25HSSEYRISySQqY9R_baqzzbUlcAm-t440asvhZAqQdIEOMyeXUR89U3OKskQLHY4LUHPL8scg956ff4E-08cBop64d7hNeGeE2wP2xPgsHJ2JjKibVWsAcTb6HDtYvFZWnt5IsmqKTKDWGXrfhDGErV1qh5G7H9W2YWL9IIpmjXAG0xqNGJRrZ9CpMCTPW-iev5Y7C-Nm9u3Wke96dc6aZk-iFdtawBmnh06ZFAs8fw\",\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRlbnRpdHkiOiJCZUJveDEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTYyMjQ5MjU4OCwiZXhwIjoxNjIyNTc4OTg4LCJpc3MiOiJQcmFrdGlrdW0gV2ViIEFwcGxpY2F0aW9uIn0.ICOFYB4eSZen8OVh4HxNbB2uo726xLhfdoAqmRgFrzKK4DGnKopq929l4UuLv6NxGYuNhJQx0Vxch_628WTN2-1oq3Kl3JTaKHNtpoteDA3muu13niHvGPxwbDlH-OjCoBqAq5ESpk91lUfXFRUAhIuwFVMKPn1iumfOQgsfNXwd8PkiRwsgykTqNL0jlEaSABL8hhmGk0-XZUlXxHLx00qPCTtTA0KxGEZ0NazWHQIWLUtE6miXgFUzJfTK2O3wBsF_sGHoK-C2z_OGRW9amgUsDSNGUTavf0OrE8HO9dGaJZOwOh2F5QFGa0FSMvRtsjvDJIgAYJXdWVgyyz6pNA\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST user log in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"bowanderlust4@gmail.com\",\r\n    \"password\":\"Lion.King4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:40080/api/auth/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"auth",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST user log in - tokne generated",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"bowanderlust4@gmail.com\",\r\n    \"password\":\"Lion.King4\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/auth/user/login",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"auth",
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1134"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"46e-XgFLa+uRgF7HvJER25jpa3lXnTo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 08:27:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJib3dhbmRlcmx1c3Q0QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjIyNTM2MDYxLCJleHAiOjE2MjI2MjI0NjEsImlzcyI6IlByYWt0aWt1bSBXZWIgQXBwbGljYXRpb24ifQ.N3OmgbKqkj24-Q8TXTq-WsqpWaiwEVdSd1jTMmVt7AVl4l-iySSUzOLFkeiJi8exuZEu-7cNdZN7rsmoOMFLEffasQn1YMSzBdC0oa-UGwxxBaGX7YaZaB2Mz37ws5yTHq24pvv3-2V0j7lXPnub_8ny1mYZQBLCaLqvp6zl8daNa45FVON1I2levUWFz2okb-yh-OeoYCQTM0BSSeoDb5UCWi-WfxGT3Jska2qaxIZGOL-fDgNRmS11WvG5ofxRmJZwWG2ssdBXc64oSHgRURFI0E6DrqiA_jjHhd0rH3Hm_OJ9aEX-23ObtUo6a4ozp7AO9MjFf18OWltD1YCGmA\",\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJib3dhbmRlcmx1c3Q0QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjIyNTM2MDYxLCJleHAiOjE2MjI2MjI0NjEsImlzcyI6IlByYWt0aWt1bSBXZWIgQXBwbGljYXRpb24ifQ.W0_IdAdWB5HmTlx_zQVN8nOVR-hgdzNpt9duP24q9p44T6ttPVTGA6d5LlRxt76gjq6_uYOeX94VxwnUmcRdcVqZP5HigcY9ao77yoEiZ1ahsqEL-OTlPAX655I06e9X_hOVHTO7olzKcQVq59X-07nuSjjN75jhBGCiGKkhQpCxhHVjU9c0k-32v4w9OpI41kggXuA9EMCpauzDEzsVFhGDeG_tWuAGGfAhWZ9jecqgAUPv-dLOGB7c1BmpYbIzMFlQmg6tGj1q-uNKmS3fo0xiO2Oj8TvfYw9GKhg1bqPUXXaGOslClxpeI25zHq1dMKAHpvQek6dyCi7uHNuSFQ\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "GET user id order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": [
+						{
+							"name": "GET user id order - trying with used token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/user/1/order",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user",
+										"1",
+										"order"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 11:48:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						},
+						{
+							"name": "GET user id order - got all orders from used id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/user/5/order",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"user",
+										"5",
+										"order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1204"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4b4-ACT+BIFOr0ewrUHBAdFNPQb2iKg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 11:57:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"articles\": [\n            {\n                \"cartArticleId\": 1,\n                \"articleId\": 1,\n                \"quantity\": 5,\n                \"article\": {\n                    \"features\": [],\n                    \"prices\": [],\n                    \"photos\": [\n                        {\n                            \"photoId\": 1,\n                            \"imagePath\": \"/static/pic1.png\"\n                        }\n                    ],\n                    \"articleId\": 1,\n                    \"name\": \"samo ti\",\n                    \"excerpt\": \"neki opis\",\n                    \"description\": \"opis za prikazivanje\",\n                    \"status\": \"available\",\n                    \"isPromoted\": 1,\n                    \"createdAt\": \"2021-05-30T14:53:18.000Z\",\n                    \"categoryId\": 1,\n                    \"currentPrice\": \"10.00\",\n                    \"category\": {\n                        \"parentCategoryId\": 0,\n                        \"parentCategory\": null,\n                        \"subcategories\": [\n                            {\n                                \"parentCategoryId\": 1,\n                                \"parentCategory\": null,\n                                \"subcategories\": [],\n                                \"features\": [\n                                    {\n                                        \"categoryId\": 2,\n                                        \"category\": null,\n                                        \"featureId\": 2,\n                                        \"name\": \"poliester\"\n                                    },\n                                    {\n                                        \"categoryId\": 1,\n                                        \"category\": null,\n                                        \"featureId\": 1,\n                                        \"name\": \"vuneni\"\n                                    }\n                                ],\n                                \"categoryId\": 2,\n                                \"name\": \"Druga(1)\",\n                                \"imagePath\": \"/static/image/2.png\"\n                            }\n                        ],\n                        \"features\": [\n                            {\n                                \"categoryId\": 1,\n                                \"category\": null,\n                                \"featureId\": 1,\n                                \"name\": \"vuneni\"\n                            }\n                        ],\n                        \"categoryId\": 1,\n                        \"name\": \"Prva\",\n                        \"imagePath\": \"/static/image/1.png\"\n                    }\n                }\n            }\n        ],\n        \"order\": {\n            \"orderId\": 1,\n            \"createdAt\": \"2021-06-01T10:16:40.000Z\",\n            \"status\": \"pending\"\n        },\n        \"cartId\": 2,\n        \"userId\": 5,\n        \"createdAt\": \"2021-06-01T10:16:40.000Z\",\n        \"user\": {\n            \"userId\": 5,\n            \"email\": \"bowanderlust4@gmail.com\",\n            \"passwordHash\": \"$2b$11$xDGh3jLMCROQ8UhYYHugaOEvyK26buRC.hwD9qu18oc/Oz1o1i9wK\",\n            \"forename\": \"Bo\",\n            \"surname\": \"Bo\",\n            \"phoneNumber\": \"0230482482\",\n            \"postalAddress\": \"Seoul 18\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJib3dhbmRlcmx1c3Q0QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjIyNDkyODkwLCJleHAiOjE2MjI1NzkyOTAsImlzcyI6IlByYWt0aWt1bSBXZWIgQXBwbGljYXRpb24ifQ.K_gIdoVBMySd9cRufpPN4dUziyF76JfHOY-ysTL7VV_puC09ZH9yHYCx6e4J9d9BRtNwggc_KJPeeHWxm4PCEfBB5vQHgtI4BVCWstrtRTzdPbhajuMQVnV3cDw2VPgjUqHJnyIZlfzMHbMt3yOdeuoNMFYj-7MqD7Dkt6zcN2RKXah9gVo1DvGSfVi6zAFcr-uviUXIrmP3C7o9QCLWgoP9o-M_h8Gd6S4WplrAVR1buPdHh4DsMbRdko4q_NJQgHIjOlS1kZ4ZR5PcwRQkYAEiLX-Syvois82h_aC6L7ZNQ9Ori6f0oKmb30Guq8RJ4mzLtmKuunMVrnG86_95lg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/cart",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"cart"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET cart - got cart",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/cart",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "306"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"132-H1SPA5gILzr1+v4Ay2J/KfTdGGk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 08:30:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articles\": [],\n    \"order\": null,\n    \"cartId\": 1,\n    \"userId\": 5,\n    \"createdAt\": \"2021-06-01T09:30:33.000Z\",\n    \"user\": {\n        \"userId\": 5,\n        \"email\": \"bowanderlust4@gmail.com\",\n        \"passwordHash\": \"$2b$11$xDGh3jLMCROQ8UhYYHugaOEvyK26buRC.hwD9qu18oc/Oz1o1i9wK\",\n        \"forename\": \"Bo\",\n        \"surname\": \"Bo\",\n        \"phoneNumber\": \"0230482482\",\n        \"postalAddress\": \"Seoul 18\"\n    }\n}"
+						},
+						{
+							"name": "GET cart - cart created when there isn't one for the logged in user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/cart",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "306"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"132-OyYLdzpWwKnB2IgnW67XM+XyEew\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 08:31:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articles\": [],\n    \"order\": null,\n    \"cartId\": 2,\n    \"userId\": 5,\n    \"createdAt\": \"2021-06-01T09:31:25.000Z\",\n    \"user\": {\n        \"userId\": 5,\n        \"email\": \"bowanderlust4@gmail.com\",\n        \"passwordHash\": \"$2b$11$xDGh3jLMCROQ8UhYYHugaOEvyK26buRC.hwD9qu18oc/Oz1o1i9wK\",\n        \"forename\": \"Bo\",\n        \"surname\": \"Bo\",\n        \"phoneNumber\": \"0230482482\",\n        \"postalAddress\": \"Seoul 18\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "GET all orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJCb2phbmEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTYyMjU0NDk1OCwiZXhwIjoxNjIyNjMxMzU4LCJpc3MiOiJQcmFrdGlrdW0gV2ViIEFwcGxpY2F0aW9uIn0.HOuq-TczZ3svqeuKrVKIsBsoQfFrYcYKCZXrGnF_JLlSIX33qgOzk1aD2cofHQldNGukrIY6CY-vSdroiXP6wt3d8CKlS5vkceua4yXi-AWYCGCJEXPpbDX9xn-JFhMxUZXXecZCyIY-oa67mX9AcTEnw5OSgighvoemd62eupRCayyplVAZdLAzqrxcc4SgolA6iGqcMvgj2V1q9-3BM2ofsest5zYiFxbhPRW382E0eOyUVYGeQQfzRK13jHEYlpStE2pmqgawm0dKiB6CNrvamb-LaHAsfP5KjPaANfNKPOT-h6MuSF3v3V46XPuquCSAdsmQgDRDkTruB4vfxQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/order",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all orders - trying it with user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/order",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"order"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 09:32:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						},
+						{
+							"name": "GET all orders - gell all orders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/order",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1204"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4b4-ACT+BIFOr0ewrUHBAdFNPQb2iKg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 11:56:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"articles\": [\n            {\n                \"cartArticleId\": 1,\n                \"articleId\": 1,\n                \"quantity\": 5,\n                \"article\": {\n                    \"features\": [],\n                    \"prices\": [],\n                    \"photos\": [\n                        {\n                            \"photoId\": 1,\n                            \"imagePath\": \"/static/pic1.png\"\n                        }\n                    ],\n                    \"articleId\": 1,\n                    \"name\": \"samo ti\",\n                    \"excerpt\": \"neki opis\",\n                    \"description\": \"opis za prikazivanje\",\n                    \"status\": \"available\",\n                    \"isPromoted\": 1,\n                    \"createdAt\": \"2021-05-30T14:53:18.000Z\",\n                    \"categoryId\": 1,\n                    \"currentPrice\": \"10.00\",\n                    \"category\": {\n                        \"parentCategoryId\": 0,\n                        \"parentCategory\": null,\n                        \"subcategories\": [\n                            {\n                                \"parentCategoryId\": 1,\n                                \"parentCategory\": null,\n                                \"subcategories\": [],\n                                \"features\": [\n                                    {\n                                        \"categoryId\": 2,\n                                        \"category\": null,\n                                        \"featureId\": 2,\n                                        \"name\": \"poliester\"\n                                    },\n                                    {\n                                        \"categoryId\": 1,\n                                        \"category\": null,\n                                        \"featureId\": 1,\n                                        \"name\": \"vuneni\"\n                                    }\n                                ],\n                                \"categoryId\": 2,\n                                \"name\": \"Druga(1)\",\n                                \"imagePath\": \"/static/image/2.png\"\n                            }\n                        ],\n                        \"features\": [\n                            {\n                                \"categoryId\": 1,\n                                \"category\": null,\n                                \"featureId\": 1,\n                                \"name\": \"vuneni\"\n                            }\n                        ],\n                        \"categoryId\": 1,\n                        \"name\": \"Prva\",\n                        \"imagePath\": \"/static/image/1.png\"\n                    }\n                }\n            }\n        ],\n        \"order\": {\n            \"orderId\": 1,\n            \"createdAt\": \"2021-06-01T10:16:40.000Z\",\n            \"status\": \"pending\"\n        },\n        \"cartId\": 2,\n        \"userId\": 5,\n        \"createdAt\": \"2021-06-01T10:16:40.000Z\",\n        \"user\": {\n            \"userId\": 5,\n            \"email\": \"bowanderlust4@gmail.com\",\n            \"passwordHash\": \"$2b$11$xDGh3jLMCROQ8UhYYHugaOEvyK26buRC.hwD9qu18oc/Oz1o1i9wK\",\n            \"forename\": \"Bo\",\n            \"surname\": \"Bo\",\n            \"phoneNumber\": \"0230482482\",\n            \"postalAddress\": \"Seoul 18\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET order my",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:40080/api/order/my",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"order",
+								"my"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET order my - got",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/order/my",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"order",
+										"my"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1204"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4b4-ACT+BIFOr0ewrUHBAdFNPQb2iKg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 09:31:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"articles\": [\n            {\n                \"cartArticleId\": 1,\n                \"articleId\": 1,\n                \"quantity\": 5,\n                \"article\": {\n                    \"features\": [],\n                    \"prices\": [],\n                    \"photos\": [\n                        {\n                            \"photoId\": 1,\n                            \"imagePath\": \"/static/pic1.png\"\n                        }\n                    ],\n                    \"articleId\": 1,\n                    \"name\": \"samo ti\",\n                    \"excerpt\": \"neki opis\",\n                    \"description\": \"opis za prikazivanje\",\n                    \"status\": \"available\",\n                    \"isPromoted\": 1,\n                    \"createdAt\": \"2021-05-30T14:53:18.000Z\",\n                    \"categoryId\": 1,\n                    \"currentPrice\": \"10.00\",\n                    \"category\": {\n                        \"parentCategoryId\": 0,\n                        \"parentCategory\": null,\n                        \"subcategories\": [\n                            {\n                                \"parentCategoryId\": 1,\n                                \"parentCategory\": null,\n                                \"subcategories\": [],\n                                \"features\": [\n                                    {\n                                        \"categoryId\": 2,\n                                        \"category\": null,\n                                        \"featureId\": 2,\n                                        \"name\": \"poliester\"\n                                    },\n                                    {\n                                        \"categoryId\": 1,\n                                        \"category\": null,\n                                        \"featureId\": 1,\n                                        \"name\": \"vuneni\"\n                                    }\n                                ],\n                                \"categoryId\": 2,\n                                \"name\": \"Druga(1)\",\n                                \"imagePath\": \"/static/image/2.png\"\n                            }\n                        ],\n                        \"features\": [\n                            {\n                                \"categoryId\": 1,\n                                \"category\": null,\n                                \"featureId\": 1,\n                                \"name\": \"vuneni\"\n                            }\n                        ],\n                        \"categoryId\": 1,\n                        \"name\": \"Prva\",\n                        \"imagePath\": \"/static/image/1.png\"\n                    }\n                }\n            }\n        ],\n        \"order\": {\n            \"orderId\": 1,\n            \"createdAt\": \"2021-06-01T10:16:40.000Z\",\n            \"status\": \"pending\"\n        },\n        \"cartId\": 2,\n        \"userId\": 5,\n        \"createdAt\": \"2021-06-01T10:16:40.000Z\",\n        \"user\": {\n            \"userId\": 5,\n            \"email\": \"bowanderlust4@gmail.com\",\n            \"passwordHash\": \"$2b$11$xDGh3jLMCROQ8UhYYHugaOEvyK26buRC.hwD9qu18oc/Oz1o1i9wK\",\n            \"forename\": \"Bo\",\n            \"surname\": \"Bo\",\n            \"phoneNumber\": \"0230482482\",\n            \"postalAddress\": \"Seoul 18\"\n        }\n    }\n]"
+						},
+						{
+							"name": "GET order my - admin trying to acces my order",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:40080/api/order/my",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"order",
+										"my"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 12:39:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						}
+					]
+				},
+				{
+					"name": "POST add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"articleId\":1,\r\n    \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:40080/api/cart",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"cart"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST add - added article to cart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"articleId\":1,\r\n    \"quantity\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/cart",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1135"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"46f-Pw/+bYh+bglLdcjjZ40MVHsJNM0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 08:35:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articles\": [\n        {\n            \"cartArticleId\": 1,\n            \"articleId\": 1,\n            \"quantity\": 2,\n            \"article\": {\n                \"features\": [],\n                \"prices\": [],\n                \"photos\": [\n                    {\n                        \"photoId\": 1,\n                        \"imagePath\": \"/static/pic1.png\"\n                    }\n                ],\n                \"articleId\": 1,\n                \"name\": \"samo ti\",\n                \"excerpt\": \"neki opis\",\n                \"description\": \"opis za prikazivanje\",\n                \"status\": \"available\",\n                \"isPromoted\": 1,\n                \"createdAt\": \"2021-05-30T14:53:18.000Z\",\n                \"categoryId\": 1,\n                \"currentPrice\": \"10.00\",\n                \"category\": {\n                    \"parentCategoryId\": 0,\n                    \"parentCategory\": null,\n                    \"subcategories\": [\n                        {\n                            \"parentCategoryId\": 1,\n                            \"parentCategory\": null,\n                            \"subcategories\": [],\n                            \"features\": [\n                                {\n                                    \"categoryId\": 2,\n                                    \"category\": null,\n                                    \"featureId\": 2,\n                                    \"name\": \"poliester\"\n                                },\n                                {\n                                    \"categoryId\": 1,\n                                    \"category\": null,\n                                    \"featureId\": 1,\n                                    \"name\": \"vuneni\"\n                                }\n                            ],\n                            \"categoryId\": 2,\n                            \"name\": \"Druga(1)\",\n                            \"imagePath\": \"/static/image/2.png\"\n                        }\n                    ],\n                    \"features\": [\n                        {\n                            \"categoryId\": 1,\n                            \"category\": null,\n                            \"featureId\": 1,\n                            \"name\": \"vuneni\"\n                        }\n                    ],\n                    \"categoryId\": 1,\n                    \"name\": \"Prva\",\n                    \"imagePath\": \"/static/image/1.png\"\n                }\n            }\n        }\n    ],\n    \"order\": null,\n    \"cartId\": 2,\n    \"userId\": 5,\n    \"createdAt\": \"2021-06-01T09:31:25.000Z\",\n    \"user\": {\n        \"userId\": 5,\n        \"email\": \"bowanderlust4@gmail.com\",\n        \"passwordHash\": \"$2b$11$xDGh3jLMCROQ8UhYYHugaOEvyK26buRC.hwD9qu18oc/Oz1o1i9wK\",\n        \"forename\": \"Bo\",\n        \"surname\": \"Bo\",\n        \"phoneNumber\": \"0230482482\",\n        \"postalAddress\": \"Seoul 18\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT cart",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"articleId\":1,\r\n        \"quantity\":5\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:40080/api/cart",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"cart"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT cart - added quantity to an article",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"articleId\":1,\r\n        \"quantity\":5\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/cart",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1135"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"46f-rzNYkkARz1veGhU3WzlupAAKMjc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 09:14:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articles\": [\n        {\n            \"cartArticleId\": 1,\n            \"articleId\": 1,\n            \"quantity\": 5,\n            \"article\": {\n                \"features\": [],\n                \"prices\": [],\n                \"photos\": [\n                    {\n                        \"photoId\": 1,\n                        \"imagePath\": \"/static/pic1.png\"\n                    }\n                ],\n                \"articleId\": 1,\n                \"name\": \"samo ti\",\n                \"excerpt\": \"neki opis\",\n                \"description\": \"opis za prikazivanje\",\n                \"status\": \"available\",\n                \"isPromoted\": 1,\n                \"createdAt\": \"2021-05-30T14:53:18.000Z\",\n                \"categoryId\": 1,\n                \"currentPrice\": \"10.00\",\n                \"category\": {\n                    \"parentCategoryId\": 0,\n                    \"parentCategory\": null,\n                    \"subcategories\": [\n                        {\n                            \"parentCategoryId\": 1,\n                            \"parentCategory\": null,\n                            \"subcategories\": [],\n                            \"features\": [\n                                {\n                                    \"categoryId\": 2,\n                                    \"category\": null,\n                                    \"featureId\": 2,\n                                    \"name\": \"poliester\"\n                                },\n                                {\n                                    \"categoryId\": 1,\n                                    \"category\": null,\n                                    \"featureId\": 1,\n                                    \"name\": \"vuneni\"\n                                }\n                            ],\n                            \"categoryId\": 2,\n                            \"name\": \"Druga(1)\",\n                            \"imagePath\": \"/static/image/2.png\"\n                        }\n                    ],\n                    \"features\": [\n                        {\n                            \"categoryId\": 1,\n                            \"category\": null,\n                            \"featureId\": 1,\n                            \"name\": \"vuneni\"\n                        }\n                    ],\n                    \"categoryId\": 1,\n                    \"name\": \"Prva\",\n                    \"imagePath\": \"/static/image/1.png\"\n                }\n            }\n        }\n    ],\n    \"order\": null,\n    \"cartId\": 2,\n    \"userId\": 5,\n    \"createdAt\": \"2021-06-01T09:31:25.000Z\",\n    \"user\": {\n        \"userId\": 5,\n        \"email\": \"bowanderlust4@gmail.com\",\n        \"passwordHash\": \"$2b$11$xDGh3jLMCROQ8UhYYHugaOEvyK26buRC.hwD9qu18oc/Oz1o1i9wK\",\n        \"forename\": \"Bo\",\n        \"surname\": \"Bo\",\n        \"phoneNumber\": \"0230482482\",\n        \"postalAddress\": \"Seoul 18\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "POST order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cartId\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:40080/api/cart/order",
+							"host": [
+								"localhost"
+							],
+							"port": "40080",
+							"path": [
+								"api",
+								"cart",
+								"order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST order - added cart to order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cartId\":2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:40080/api/cart/order",
+									"host": [
+										"localhost"
+									],
+									"port": "40080",
+									"path": [
+										"api",
+										"cart",
+										"order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1202"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4b2-Eu7pALZgMWjFTBDhXhiW8BZPwqs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jun 2021 09:16:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articles\": [\n        {\n            \"cartArticleId\": 1,\n            \"articleId\": 1,\n            \"quantity\": 5,\n            \"article\": {\n                \"features\": [],\n                \"prices\": [],\n                \"photos\": [\n                    {\n                        \"photoId\": 1,\n                        \"imagePath\": \"/static/pic1.png\"\n                    }\n                ],\n                \"articleId\": 1,\n                \"name\": \"samo ti\",\n                \"excerpt\": \"neki opis\",\n                \"description\": \"opis za prikazivanje\",\n                \"status\": \"available\",\n                \"isPromoted\": 1,\n                \"createdAt\": \"2021-05-30T14:53:18.000Z\",\n                \"categoryId\": 1,\n                \"currentPrice\": \"10.00\",\n                \"category\": {\n                    \"parentCategoryId\": 0,\n                    \"parentCategory\": null,\n                    \"subcategories\": [\n                        {\n                            \"parentCategoryId\": 1,\n                            \"parentCategory\": null,\n                            \"subcategories\": [],\n                            \"features\": [\n                                {\n                                    \"categoryId\": 2,\n                                    \"category\": null,\n                                    \"featureId\": 2,\n                                    \"name\": \"poliester\"\n                                },\n                                {\n                                    \"categoryId\": 1,\n                                    \"category\": null,\n                                    \"featureId\": 1,\n                                    \"name\": \"vuneni\"\n                                }\n                            ],\n                            \"categoryId\": 2,\n                            \"name\": \"Druga(1)\",\n                            \"imagePath\": \"/static/image/2.png\"\n                        }\n                    ],\n                    \"features\": [\n                        {\n                            \"categoryId\": 1,\n                            \"category\": null,\n                            \"featureId\": 1,\n                            \"name\": \"vuneni\"\n                        }\n                    ],\n                    \"categoryId\": 1,\n                    \"name\": \"Prva\",\n                    \"imagePath\": \"/static/image/1.png\"\n                }\n            }\n        }\n    ],\n    \"order\": {\n        \"orderId\": 1,\n        \"createdAt\": \"2021-06-01T10:16:40.000Z\",\n        \"status\": \"pending\"\n    },\n    \"cartId\": 2,\n    \"userId\": 5,\n    \"createdAt\": \"2021-06-01T09:31:25.000Z\",\n    \"user\": {\n        \"userId\": 5,\n        \"email\": \"bowanderlust4@gmail.com\",\n        \"passwordHash\": \"$2b$11$xDGh3jLMCROQ8UhYYHugaOEvyK26buRC.hwD9qu18oc/Oz1o1i9wK\",\n        \"forename\": \"Bo\",\n        \"surname\": \"Bo\",\n        \"phoneNumber\": \"0230482482\",\n        \"postalAddress\": \"Seoul 18\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJCb2phbmEiLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTYyMjU0MzYzMywiZXhwIjoxNjIyNjMwMDMzLCJpc3MiOiJQcmFrdGlrdW0gV2ViIEFwcGxpY2F0aW9uIn0.BC9L48hTqjO-CL5Z_F9Bpm-92bciW8NqNeVsBr1XLgWq69z1CLnkGBhPw9pquTCr8aw59yw6brSygYvIUDA1h0cNTULGUz_bPJkMmsidnTKrQCaKjNDIWJ-AX9D7W_w65G0UDZqA-k_oNR6nt9KGAjEdM8TcXf1xo9uxLmwKDkeLm_BpjLRKFp0dZsOUpmwoNL1Aky9ay4pi2zdkIkY1SP3CCkILoyw1WMqUJk6E6MgJc68pLLM0SQUVWbD_DrraQESifILSduuy72KE0pdzAy3NF6v62I6BWrGNrpzOgPbsFfr4poClXhgVRqM3ZEFBLjYdPxY0M2JGCcHnGOTPkg",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

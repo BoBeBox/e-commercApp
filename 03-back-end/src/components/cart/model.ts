@@ -21,7 +21,7 @@ export default class CartModel implements IModel {
     userId: number;
     user: UserModel;
     articles: CartArticleModel[] = [];
-    order?: OrderModel = null;
+    order?: OrderModel|null = null;
 }
 
 export { CartArticleModel }
