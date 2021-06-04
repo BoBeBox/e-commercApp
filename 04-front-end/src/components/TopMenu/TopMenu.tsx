@@ -1,6 +1,7 @@
 import { Nav } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import React from 'react';
+import CartLink from "../Cart/CartLink";
 
 class TopMenuProperties{
     authorizedRole: "user"|"administrator"|"visitor" = "visitor";
@@ -36,10 +37,7 @@ export default class TopMenu extends React.Component<TopMenuProperties> {
         if (this.props.authorizedRole === "administrator") {
             return (
                 <Nav className="justify-content-center">
-                    <Nav.Item>
-                        <Link className="nav-link" to="/dashboard">Dashboard</Link>
-                    </Nav.Item>
-
+                    
                     <Nav.Item>
                         <Link className="nav-link" to="/dashboard/category">Categories</Link>
                     </Nav.Item>
@@ -88,6 +86,8 @@ export default class TopMenu extends React.Component<TopMenuProperties> {
                     <Nav.Item>
                         <Link className="nav-link" to="/user/logout">Logout</Link>
                     </Nav.Item>
+                    
+                    <CartLink/>
 
                 </Nav>
             );

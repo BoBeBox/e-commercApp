@@ -3,9 +3,11 @@ import ArticleService from '../../services/ArticleService';
 import BasePage from '../BasePage/BasePage';
 import { PageProperties } from '../BasePage/BasePage';
 import * as path from 'path';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row, InputGroup, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ApiConfig } from '../../config/api.config';
+import CartService from '../../services/CartService';
+import EventRegister from '../../api/EventRegister';
 class ArticlePageProperties extends PageProperties {
     match?: {
         params: {
@@ -61,6 +63,21 @@ export default class ArticlePage extends BasePage<ArticlePageProperties> {
         if (prevProps.match?.params.aid !== this.props.match?.params.aid) {
             this.getArticleData();
         }
+    }
+    onChange(field: "quantity"): (event: React.ChangeEvent<HTMLInputElement>) => void {
+        return (event: React.ChangeEvent<HTMLInputElement>) => {
+            this.setState({
+                [field]: event.target.value,
+            });
+        };
+    }
+    addToChart() {
+        CartService.addToCart(
+            this.getArticleId() as number,
+            Number(this.state.quantity),
+        ).then(res => {
+            EventRegister.emit("CART_EVENT", "cart_updated");
+        });
     }
     private getThumbPath(url: string): string {
         const directory = path.dirname(url);
@@ -142,6 +159,33 @@ export default class ArticlePage extends BasePage<ArticlePageProperties> {
                             </Card.Body>
                         </Card>
                     </Col>
+                    <Col xs={12} md={4}>
+                        <Card className = "mb-3">
+                            <Card.Body>
+                                <Card.Title>
+                                    Add to cart:
+                                </Card.Title>
+                                <Card.Text as="div">
+                                <InputGroup className="mb-3">
+                                        <InputGroup.Prepend>
+                                            <InputGroup.Text>Quantity:</InputGroup.Text>
+                                        </InputGroup.Prepend>
+
+                                        <Form.Control
+                                            type="number" min="1" max="100" step="1"
+                                            value={ this.state.quantity }
+                                            onChange={ this.onChange("quantity") }
+                                        />
+                                        <InputGroup.Append>
+                                            <Button variant="primary" onClick={ () => this.addToChart() }>
+                                                Add to cart
+                                            </Button>
+                                        </InputGroup.Append>
+                                    </InputGroup>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>                     
                     <Col xs={12} md={4}>
                         <Card>
                             <Card.Body>
